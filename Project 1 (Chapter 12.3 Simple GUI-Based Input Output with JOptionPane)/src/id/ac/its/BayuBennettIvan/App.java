@@ -22,7 +22,15 @@ public class App {
             case 4:
             	Circle circle = new Circle();
             	circle.Calculate();
-            	break;
+                break;
+            case 5:
+                Trapezoid trapezoid = new Trapezoid();
+                trapezoid.Calculate();
+                break;
+            case 6:
+                Kite kite = new Kite();
+                kite.Calculate();
+                break;
             default:
                 JOptionPane.showMessageDialog(null, "Invalid Choice", "Please input a valid choice",
                         JOptionPane.ERROR_MESSAGE);
