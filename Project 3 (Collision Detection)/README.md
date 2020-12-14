@@ -67,7 +67,7 @@ Alien punya constructor untuk menginisialisasi objek tersebut.
 - Fungsi move
   Diperuntukan untuk menggerakan alien ke kiri, dan jika alien sudah keluar dari play area, alien akan balik ke kiri dengan bantuan INITIAL_X.
 
-##Penjelasan Board
+## Penjelasan Board
 
 Kelas Board ini berfungsi untuk menampung dari semua objek dari kelas-kelas yang ada. Metode di dalam kelas Board ini yang pertama ada Board() dan initBoard() untuk menginisialisasi Board. Lalu, ada initAliens() untuk menginisialisasi posisi alien, paintComponent() yang dapat menampilkan Sprite atau pesan game over, drawObjects() untuk menggambar objek yang berupa sprite. Metode-metode tersebut memerlukan pengecekan agar hanya menggambar sprite yang memang belum ada di layar melalui isVisible(). Fungsi drawGameOver() yang digunakan untuk saat pesawat bertabrakan atau alien habis. Lalu ada fungsi actionPerformed yang dimana berisi fungsi-fungsi sebagai berikut
         inGame();
