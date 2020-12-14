@@ -1,5 +1,7 @@
 # Collision Detection
 
+![Gameplay](Documentation/Gameplay.PNG)
+
 ## Penjelasan Singkat
 
 Program ini adalah sebuah program singkat yang dapat mendeteksi collision dalam sebuah permainan.
