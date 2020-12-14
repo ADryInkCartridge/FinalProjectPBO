@@ -32,6 +32,31 @@ Ada beberapa fungsi yang di ada di class tersebut yaitu
 
 Class ini juga memiliki satu constructor untuk membuat sebuah sprite.
 
+## Penjelasan SpaceShip
+
+Spaceship merupakan child dari Class Sprite, jadi Class SpaceShip ini mendapatkan fungsi-fungsi dan properti yang ada di Class Sprite. Di class ini ada juga properti tambahan yaitu dx dan dy, yaitu perpindahan gerak objek, dan juga missile sebagai peluru yang ditembakan.
+
+Ada beberapa fungsi di class ini yaitu
+- Fungsi Getter
+  - getMissiles
+- Fungsi initCraft
+- Fungsi move
+- Fungsi keyPressed
+- Fungsi fire
+- Fungsi keyReleased
+
+Class ini juga memiliki default constructor.
+
+## Penjelasan Missile
+
+Missile merupakan child dari Class Sprite juga. Pada class ini terdapat atribut BOARD_WIDTH = 390 dan MISSILE_SPEED = 2 untuk mendefinisikan lebar kotak game dan juga kecepatan tembakan peluru.
+
+Ada beberapa fungsi di class ini yaitu
+- Fungsi initMissile
+- Fungsi move
+
+Sama seperti class lainnya, class ini juga memiliki default constructor.
+
 ## Penjelasan Alien
 
 Alien merupakan salah satu sprite game, ia memiliki attribute INITIAL_X = 400 agar alien yang sudah melewati board akan balik ke kanan board lagi.
