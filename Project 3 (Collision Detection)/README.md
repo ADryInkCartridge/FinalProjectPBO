@@ -1,7 +1,5 @@
 # Collision Detection
 
-![Gameplay](Documentation/Gameplay.PNG)
-
 ## Penjelasan Singkat
 
 Program ini adalah sebuah program singkat yang dapat mendeteksi collision dalam sebuah permainan.
@@ -68,5 +66,16 @@ Alien punya constructor untuk menginisialisasi objek tersebut.
   Saat menginisialisasi alien dengan fungsi initAlien(), sprite alien langsung diload dari library.
 - Fungsi move
   Diperuntukan untuk menggerakan alien ke kiri, dan jika alien sudah keluar dari play area, alien akan balik ke kiri dengan bantuan INITIAL_X.
+
+## Penjelasan Board
+
+Kelas Board ini berfungsi untuk menampung dari semua objek dari kelas-kelas yang ada. Metode di dalam kelas Board ini yang pertama ada Board() dan initBoard() untuk menginisialisasi Board. Lalu, ada initAliens() untuk menginisialisasi posisi alien, paintComponent() yang dapat menampilkan Sprite atau pesan game over, drawObjects() untuk menggambar objek yang berupa sprite. Metode-metode tersebut memerlukan pengecekan agar hanya menggambar sprite yang memang belum ada di layar melalui isVisible(). Fungsi drawGameOver() yang digunakan untuk saat pesawat bertabrakan atau alien habis. Lalu ada fungsi actionPerformed yang dimana berisi fungsi-fungsi sebagai berikut
+        inGame();
+        updateShip();
+        updateMissiles();
+        updateAliens();
+        checkCollisions();
+        repaint();
+Setelah itu, ada fungsi updateShip() untuk menggerakkan pesawat, updateMissiles() untuk menggerakan missile, updateAliens() untuk mengecek berapa alien yang tersisa, jika masih tersisa digunakan untuk menggerakan alien. Terakhir, ada checkCollisions() yang digunakan untuk mengecek apakah pesawat akan menabrak alien, jika pesawat menabrak alien, maka game akan langsung selesai. Fungsi yang digunakan untuk memeriksa tabrakan antara alien dan pesawat adalah dengan getBounds() untuk melihat batas ujung dari objek lalu memeriksa apakah ada yang saling berpotongan menggunakan fungsi intersects(). Jika berpotongan, maka kedua objek bertabrakan, begitupun sebaliknya. checkCollisions() juga digunakan untuk missile akan mengenai alien, jika alien kena missile, maka alien akan mati, jika tidak mengenai alien, maka missile akan terus bergerak ke kanan. 
 
 ![ClassDiagram](Documentation/ClassDiagram.PNG)
