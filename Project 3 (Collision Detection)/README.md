@@ -67,4 +67,4 @@ Alien punya constructor untuk menginisialisasi objek tersebut.
 - Fungsi move
   Diperuntukan untuk menggerakan alien ke kiri, dan jika alien sudah keluar dari play area, alien akan balik ke kiri dengan bantuan INITIAL_X.
 
-![ClassDiagram](ClassDiagram.png)
+![ClassDiagram](Documentation/ClassDiagram.PNG)
