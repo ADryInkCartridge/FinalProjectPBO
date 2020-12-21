@@ -1,5 +1,7 @@
 # Collision Detection
 
+[![MouseCollisionDetect](http://i3.ytimg.com/vi/SE9JUzuM5dI/maxresdefault.jpg)](https://youtu.be/SE9JUzuM5dI "Collision Detection With Mouse")
+
 ## Penjelasan Singkat
 
 Program ini adalah sebuah program singkat yang dapat mendeteksi collision dalam sebuah permainan.
