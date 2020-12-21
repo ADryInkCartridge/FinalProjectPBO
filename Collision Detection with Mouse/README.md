@@ -92,6 +92,6 @@ Setelah itu, ada fungsi updateShip() untuk menggerakkan pesawat, updateMissiles(
 
 Perbedaan dari projek sebelumnya adalah dengan ditambahkannya Event Handler mouse yaitu dari interface MouseListener dan MouseMotionListener untuk membuat pergerakan spaceship, dan melakukan penembakan dengan mouse dengan cara digerakkan dan juga diclick.
 
-![ClassDiagram](Documentation/ClassDiagram.PNG)
+![ClassDiagram](Documentation/ClassDiagram2.PNG)
 
 link video YouTube : https://youtu.be/SE9JUzuM5dI
