@@ -1,5 +1,6 @@
 # Collision Detection
 
+![Gameplay](Documentation/Gameplay.PNG)
 ## Penjelasan Singkat
 
 Program ini adalah sebuah program singkat yang dapat mendeteksi collision dalam sebuah permainan.
@@ -44,16 +45,6 @@ Ada beberapa fungsi di class ini yaitu
 - Fungsi keyPressed
 - Fungsi fire
 - Fungsi keyReleased
-- Fungsi mouseMoved
-- Fungsi mouseClicked
-- Fungsi mousePressed
-- Fungsi mouseReleased
-- Fungsi mouseEntered
-- Fungsi mouseExited
-- Fungsi mouseDragged
-- Fungsi boundaryCheck
-
-Perubahan dari project sebelumnya adalah dengan ditambahkannya beberapa fungsi event handler mouse seperti mouseMoved, mouseClicked, dll. Fungsi ini ditambahkan agar spaceship dapat digerakan menggunakan mouse daripada menggunakan keyboard. Selain itu semua hal yang dapat dilakukan keyboard seperti fire juga dapat dilakukan oleh mouse.
 
 Class ini juga memiliki default constructor.
 
@@ -88,8 +79,4 @@ Kelas Board ini berfungsi untuk menampung dari semua objek dari kelas-kelas yang
         repaint();
 Setelah itu, ada fungsi updateShip() untuk menggerakkan pesawat, updateMissiles() untuk menggerakan missile, updateAliens() untuk mengecek berapa alien yang tersisa, jika masih tersisa digunakan untuk menggerakan alien. Terakhir, ada checkCollisions() yang digunakan untuk mengecek apakah pesawat akan menabrak alien, jika pesawat menabrak alien, maka game akan langsung selesai. Fungsi yang digunakan untuk memeriksa tabrakan antara alien dan pesawat adalah dengan getBounds() untuk melihat batas ujung dari objek lalu memeriksa apakah ada yang saling berpotongan menggunakan fungsi intersects(). Jika berpotongan, maka kedua objek bertabrakan, begitupun sebaliknya. checkCollisions() juga digunakan untuk missile akan mengenai alien, jika alien kena missile, maka alien akan mati, jika tidak mengenai alien, maka missile akan terus bergerak ke kanan. 
 
-Perbedaan dari projek sebelumnya adalah dengan ditambahkannya Event Handler mouse yaitu dari interface MouseListener dan MouseMotionListener untuk membuat pergerakan spaceship, dan melakukan penembakan dengan mouse dengan cara digerakkan dan juga diclick.
-
 ![ClassDiagram](Documentation/ClassDiagram.PNG)
-
-link video YouTube : https://youtu.be/SE9JUzuM5dI
