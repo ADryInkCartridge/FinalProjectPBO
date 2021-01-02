@@ -22,4 +22,20 @@ public class Music {
             e.printStackTrace();
         }
     }
+
+    void playSFX(String loc) {
+        File path = new File(loc);
+        try {
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(path);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInput);
+            clip.start();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
 }
