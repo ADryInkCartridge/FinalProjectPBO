@@ -25,6 +25,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
 			700,725,750,775,800,825,850};
 	private int[] foodY = {75,100,125,150,175,200,225,250,275,300,
 			325,350,375,400,425,450,47,500,525,550,575,600,625};
+
+	private int[] rottenX = {25,50,75,100,125,150,175,200,225,250,275,300,
+			325,350,375,400,425,450,47,500,525,550,575,600,625,650,675,
+			700,725,750,775,800,825,850};
+	private int[] rottenY = {75,100,125,150,175,200,225,250,275,300,
+			325,350,375,400,425,450,47,500,525,550,575,600,625};
 	
  	
 	private boolean left = false;
@@ -158,14 +164,14 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
 		}
 		
 		rotten = new ImageIcon("src/assets/rotten.png");
-		rotten.paintIcon(this, g, foodX[xpos], foodY[ypos]);
+		rotten.paintIcon(this, g, rottenX[xpos], rottenY[ypos]);
 
 		//collision detection of snake head and rotten food
-		if(foodX[xpos]==snakeX[0]&&foodY[ypos]==snakeY[0]) {
+		if(rottenX[xpos]==snakeX[0]&&rottenY[ypos]==snakeY[0]) {
 			len--;
 			score-=25;
-			xpos=random.nextInt(24);
-			ypos=random.nextInt(33);
+			xpos=random.nextInt(34);
+			ypos=random.nextInt(23);
 		}
 		
 		g.dispose();
