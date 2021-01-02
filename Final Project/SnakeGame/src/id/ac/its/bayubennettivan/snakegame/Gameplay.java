@@ -38,6 +38,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
 	private ImageIcon downMouth;
 	private ImageIcon snakeBody;
 	private ImageIcon food; 
+	private ImageIcon rotten;
 	
 	private Random random = new Random();
 	
@@ -156,7 +157,16 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener{
 			}
 		}
 		
-		
+		rotten = new ImageIcon("src/assets/rotten.png");
+		rotten.paintIcon(this, g, foodX[xpos], foodY[ypos]);
+
+		//collision detection of snake head and rotten food
+		if(foodX[xpos]==snakeX[0]&&foodY[ypos]==snakeY[0]) {
+			len--;
+			score-=25;
+			xpos=random.nextInt(24);
+			ypos=random.nextInt(33);
+		}
 		
 		g.dispose();
 	}
