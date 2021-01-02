@@ -3,6 +3,7 @@ package ac.id.its.BayuBennettIvan;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Menu extends JPanel implements ActionListener {
 
@@ -18,5 +19,4 @@ public class Menu extends JPanel implements ActionListener {
     JPanel panel = new JPanel();
     JPanel game = new JPanel();
     JPanel menu = new JPanel();
-
-    
+}
