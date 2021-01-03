@@ -19,29 +19,23 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 	private ImageIcon titleImage;
 
-	private int[] snakeX = new int[750];
-	private int[] snakeY = new int[750];
+	// private int[] snakeX = new int[750];
+	// private int[] snakeY = new int[750];
 
-	private int[] foodX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47,
-			500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
-	private int[] foodY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47, 500, 525,
-			550, 575, 600, 625 };
+	// private int[] foodX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275,
+	// 300, 325, 350, 375, 400, 425, 450, 47,
+	// 500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
+	// private int[] foodY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325,
+	// 350, 375, 400, 425, 450, 47, 500, 525,
+	// 550, 575, 600, 625 };
 
-	private int[] rottenX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47,
-			500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
-	private int[] rottenY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47, 500,
-			525, 550, 575, 600, 625 };
+	// private int[] rottenX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275,
+	// 300, 325, 350, 375, 400, 425, 450, 47,
+	// 500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
+	// private int[] rottenY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300,
+	// 325, 350, 375, 400, 425, 450, 47, 500,
+	// 525, 550, 575, 600, 625 };
 
-	private boolean left = false;
-	private boolean right = false;
-	private boolean up = false;
-	private boolean down = false;
-
-	private ImageIcon rightMouth;
-	private ImageIcon leftMouth;
-	private ImageIcon upMouth;
-	private ImageIcon downMouth;
-	private ImageIcon snakeBody;
 	private ImageIcon food;
 	private ImageIcon rotten;
 
@@ -50,7 +44,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private int xpos = random.nextInt(34);
 	private int ypos = random.nextInt(23);
 
-	private int len = 3;
 	private int moves = 0;
 	private int score = 0;
 
@@ -76,31 +69,28 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 	public void paint(Graphics g) {
 		// snake position (snakeX[0] and snakeY[0] is head
-		if (moves == 0) {
-			snakeX[2] = 50;
-			snakeX[1] = 75;
-			snakeX[0] = 100;
-			snakeY[2] = 100;
-			snakeY[1] = 100;
-			snakeY[0] = 100;
 
-		}
 		// draw title image border
 		g.setColor(Color.WHITE);
 		g.drawRect(x, y, width, height);
+
 		// draw title image
 		titleImage = new ImageIcon("src/assets/snaketitle.jpg");
 		titleImage.paintIcon(this, g, x + 1, y + 1);
+
 		// draw gameplay border
 		g.setColor(Color.WHITE);
 		g.drawRect(x, 74, width, height + 522);
+
 		// draw background
 		g.setColor(Color.BLACK);
 		g.fillRect(x + 1, 75, width - 1, height + 520);
+
 		// draw scores
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("arial", Font.PLAIN, 14));
 		g.drawString("Score: " + score, 780, 30);
+
 		// draw length of snake
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("arial", Font.PLAIN, 14));
