@@ -13,8 +13,8 @@ public class Snake {
     private int boardLeft = 25;
     private int boardTop = 75;
     private int boardBot = 625;
-    private List<Integer> snakeX = new ArrayList<>();
-    private List<Integer> snakeY = new ArrayList<>();
+    protected List<Integer> snakeX = new ArrayList<>();
+    protected List<Integer> snakeY = new ArrayList<>();
     private boolean left = false;
     private boolean right = false;
     private boolean up = false;
@@ -123,6 +123,22 @@ public class Snake {
                 snakeX.set(0, boardLeft);
             }
         }
+
+        for (int i = 0; i < len; i++) {
+            if (snakeX.get(i) == snakeX.get(i) && snakeY.get(i) == snakeY.get(i)) {
+                this.setDir(false, false, false, false);
+                this.setHp(0);
+                break;
+            }
+        }
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
 }
