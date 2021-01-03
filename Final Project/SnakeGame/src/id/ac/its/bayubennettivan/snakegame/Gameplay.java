@@ -19,26 +19,19 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 	private ImageIcon titleImage;
 
-	// private int[] snakeX = new int[750];
-	// private int[] snakeY = new int[750];
+	private int[] foodX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47,
+			500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
+	private int[] foodY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47, 500, 525,
+			550, 575, 600, 625 };
 
-	// private int[] foodX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275,
-	// 300, 325, 350, 375, 400, 425, 450, 47,
-	// 500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
-	// private int[] foodY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325,
-	// 350, 375, 400, 425, 450, 47, 500, 525,
-	// 550, 575, 600, 625 };
-
-	// private int[] rottenX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275,
-	// 300, 325, 350, 375, 400, 425, 450, 47,
-	// 500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
-	// private int[] rottenY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300,
-	// 325, 350, 375, 400, 425, 450, 47, 500,
-	// 525, 550, 575, 600, 625 };
+	private int[] rottenX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47,
+			500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
+	private int[] rottenY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47, 500,
+			525, 550, 575, 600, 625 };
 
 	private ImageIcon food;
 	private ImageIcon rotten;
-
+	private Snake snake;
 	private Random random = new Random();
 
 	private int xpos = random.nextInt(34);
@@ -96,41 +89,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.setFont(new Font("arial", Font.PLAIN, 14));
 		g.drawString("Length: " + len, 780, 50);
 
-		rightMouth = new ImageIcon("src/assets/rightmouth.png");
-		rightMouth.paintIcon(this, g, snakeX[0], snakeY[0]);
-
-		for (int i = 0; i < len; i++) {
-			// i=0 equals to head
-			if (i == 0 && right) {
-				rightMouth = new ImageIcon("src/assets/rightmouth.png");
-				rightMouth.paintIcon(this, g, snakeX[0], snakeY[0]);
-			}
-			if (i == 0 && left) {
-				leftMouth = new ImageIcon("src/assets/leftmouth.png");
-				leftMouth.paintIcon(this, g, snakeX[0], snakeY[0]);
-			}
-			if (i == 0 && up) {
-				upMouth = new ImageIcon("src/assets/upmouth.png");
-				upMouth.paintIcon(this, g, snakeX[0], snakeY[0]);
-			}
-			if (i == 0 && down) {
-				downMouth = new ImageIcon("src/assets/downmouth.png");
-				downMouth.paintIcon(this, g, snakeX[0], snakeY[0]);
-			}
-			// the rest is body
-			if (i != 0) {
-				snakeBody = new ImageIcon("src/assets/snakeimage.png");
-				snakeBody.paintIcon(this, g, snakeX[i], snakeY[i]);
-			}
-		}
-
 		food = new ImageIcon("src/assets/enemy.png");
 		food.paintIcon(this, g, foodX[xpos], foodY[ypos]);
 
 		// collision detection of snake head and food
-		if (foodX[xpos] == snakeX[0] && foodY[ypos] == snakeY[0]) {
+		if (foodX[xpos] == snake.snakeX.get(0) && foodY[ypos] == snakeY[0]) {
 			music.playSFX("src/assets/music/SFX/eat.wav");
-			len++;
+			snake.setLen(snake.getLen() + 1);
 			score += 25;
 			xpos = random.nextInt(34);
 			ypos = random.nextInt(23);

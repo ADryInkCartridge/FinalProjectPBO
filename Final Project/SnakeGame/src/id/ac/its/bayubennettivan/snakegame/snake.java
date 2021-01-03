@@ -4,16 +4,15 @@ import java.io.File;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 import javax.imageio.*;
 
-public class snake {
+public class Snake {
 
+    private int boardRight = 850;
+    private int boardLeft = 25;
+    private int boardTop = 75;
+    private int boardBot = 625;
     private List<Integer> snakeX = new ArrayList<>();
     private List<Integer> snakeY = new ArrayList<>();
     private boolean left = false;
@@ -28,7 +27,7 @@ public class snake {
     private int len = 3;
     private int hp;
 
-    public snake(Float HPmodifier) {
+    public Snake(Float HPmodifier) {
         this.snakeX = new ArrayList<>();
         this.snakeY = new ArrayList<>();
 
@@ -41,7 +40,7 @@ public class snake {
         this.snakeX.add(200);
         this.snakeY.add(200);
 
-        hp = (int) ((int) 100 * HPmodifier);
+        this.hp = (int) ((int) 100 * HPmodifier);
         this.len = 3;
         this.setDir(false, true, false, false);
         rightMouth = getImage("src/assets/rightmouth.png");
@@ -96,6 +95,34 @@ public class snake {
         this.snakeX.add(snakeX.get(this.len - 1));
         this.snakeY.add(snakeY.get(this.len - 1));
         this.len++;
+    }
+
+    public void move() {
+        for (int i = 0; i < len; i++) {
+            snakeX.set(i, snakeX.get(i - 1));
+            snakeY.set(i, snakeY.get(i - 1));
+        }
+        if (up) {
+            snakeY.set(0, snakeY.get(0) - 25);
+            if (snakeY.get(0) < boardTop) {
+                snakeY.set(0, boardBot);
+            }
+        } else if (down) {
+            snakeY.set(0, snakeY.get(0) + 25);
+            if (snakeY.get(0) > boardBot) {
+                snakeY.set(0, boardTop);
+            }
+        } else if (left) {
+            snakeX.set(0, snakeY.get(0) + 25);
+            if (snakeX.get(0) < boardLeft) {
+                snakeX.set(0, boardRight);
+            }
+        } else if (right) {
+            snakeX.set(0, snakeY.get(0) + 25);
+            if (snakeX.get(0) > boardRight) {
+                snakeX.set(0, boardLeft);
+            }
+        }
     }
 
 }

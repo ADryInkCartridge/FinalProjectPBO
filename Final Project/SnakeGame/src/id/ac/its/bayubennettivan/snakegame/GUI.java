@@ -1,6 +1,5 @@
 package id.ac.its.bayubennettivan.snakegame;
 
-import java.awt.Color;
 import javax.swing.JFrame;
 
 public class GUI extends JFrame {
