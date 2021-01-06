@@ -5,12 +5,14 @@ import java.io.IOException;
 import javax.sound.sampled.*;
 
 public class Music {
-
+	
+	private AudioInputStream audioInput;
+	private Clip clip;
     void playbgMusic(String loc) {
         File path = new File(loc);
         try {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(path);
-            Clip clip = AudioSystem.getClip();
+            audioInput = AudioSystem.getAudioInputStream(path);
+            clip = AudioSystem.getClip();
             clip.open(audioInput);
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -26,8 +28,8 @@ public class Music {
     void playSFX(String loc) {
         File path = new File(loc);
         try {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(path);
-            Clip clip = AudioSystem.getClip();
+            audioInput = AudioSystem.getAudioInputStream(path);
+            clip = AudioSystem.getClip();
             clip.open(audioInput);
             clip.start();
         } catch (UnsupportedAudioFileException e) {
@@ -37,5 +39,8 @@ public class Music {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
+    }
+    void stopAll() {
+    	clip.stop();
     }
 }
