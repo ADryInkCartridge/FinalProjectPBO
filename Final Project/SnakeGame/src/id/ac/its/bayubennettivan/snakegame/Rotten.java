@@ -29,7 +29,7 @@ public class Rotten extends Food {
     @Override
     public void render(Graphics g) {
         g.drawImage(super.getImage(), super.getFoodX(), super.getFoodY(), null);
-        System.out.println("Rot");
+        //System.out.println("Rot");
     }
 
     @Override

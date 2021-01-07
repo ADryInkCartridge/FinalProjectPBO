@@ -88,7 +88,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			g.drawString("Press 'Space' to Restart", 330, 340);
 		}
 		for (Food i : food) {
-			System.out.println(i);
+			// System.out.println(i);
 			i.render(g);
 		}
 		snake.render(g);
@@ -133,7 +133,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
 			restartGame();
 		}
-		
+
 	}
 
 	@Override
@@ -161,7 +161,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			if (food.get(i).eatenBySnake(snake)) {
 				eaten.add(i);
 
-				if (food.get(i) instanceof Food || food.size() == 0) {
+				if (food.get(i) instanceof Food) {
 					Random rng = new Random();
 					int apple = rng.nextInt(3);
 					for (int z = 0; z < apple; z++)
@@ -203,21 +203,20 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		System.out.println("Bomb");
 		return new Bomb(foodX[x], foodY[y]);
 	}
-	
+
 	public void checkBoard() {
 		boolean flag = false;
-		for (int i = 0; i < food.size(); i++) {
-			if (food.get(i) instanceof Apple)
-			{
+		for (Food i : food) {
+			if (i instanceof Apple) {
 				flag = true;
 			}
 		}
-		if (flag == false || food.size() == 0)
-		{
-			appleGen();
+		if (flag == false || food.size() == 0) {
+			System.out.println("genset");
+			food.add(appleGen());
 		}
 	}
-	
+
 	public void restartGame() {
 		food.clear();
 		snake = new Snake(1);
