@@ -19,15 +19,20 @@ public class Apple extends Food {
         try {
             return ImageIO.read(new File(loc));
         } catch (IOException e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             return null;
         }
     }
 
     @Override
     public void render(Graphics g) {
-    	System.out.println("apple");
+        System.out.println("apple");
         g.drawImage(super.getImage(), super.getFoodX(), super.getFoodY(), null);
+    }
+
+    @Override
+    public void giveCond(Snake snake) {
+        snake.addBody();
     }
 
 }

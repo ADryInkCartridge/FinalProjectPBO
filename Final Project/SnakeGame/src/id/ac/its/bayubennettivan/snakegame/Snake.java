@@ -97,6 +97,13 @@ public class Snake {
         this.len++;
     }
 
+    public void delBody()
+    {
+        this.snakeX.remove(snakeX.remove(this.len-1));
+        this.snakeY.remove(snakeY.remove(this.len-1));
+        this.len--;
+    }
+    
     public int headX() {
         return this.snakeX.get(0);
     }

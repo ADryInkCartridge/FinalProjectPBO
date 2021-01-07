@@ -29,4 +29,10 @@ public class Rotten extends Food {
     public void render(Graphics g) {
         g.drawImage(super.getImage(), super.getFoodX(), super.getFoodY(), null);
     }
+
+    @Override
+    public void giveCond(Snake snake) {
+        snake.delBody();
+
+    }
 }
