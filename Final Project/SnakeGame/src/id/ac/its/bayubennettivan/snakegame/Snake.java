@@ -97,13 +97,12 @@ public class Snake {
         this.len++;
     }
 
-    public void delBody()
-    {
-        this.snakeX.remove(snakeX.remove(this.len-1));
-        this.snakeY.remove(snakeY.remove(this.len-1));
+    public void delBody() {
+        this.snakeX.remove(snakeX.get(this.len - 1));
+        this.snakeY.remove(snakeY.get(this.len - 1));
         this.len--;
     }
-    
+
     public int headX() {
         return this.snakeX.get(0);
     }
@@ -113,12 +112,12 @@ public class Snake {
     }
 
     public void move() {
-        System.out.println(snakeX);
+        // System.out.println(snakeX);
         for (int i = len - 1; i > 0; i--) {
             snakeX.set(i, snakeX.get(i - 1));
             snakeY.set(i, snakeY.get(i - 1));
         }
-        System.out.println(snakeX);
+        // System.out.println(snakeX);
         if (up) {
             snakeY.set(0, snakeY.get(0) - 25);
             if (snakeY.get(0) < boardTop) {
@@ -139,14 +138,14 @@ public class Snake {
             if (snakeX.get(0) > boardRight) {
                 snakeX.set(0, boardLeft);
             }
-            System.out.println(snakeX);
+            // System.out.println(snakeX);
         }
 
         for (int i = 1; i < len; i++) {
             if (snakeX.get(i).equals(snakeX.get(0)) && snakeY.get(i).equals(snakeY.get(0))) {
                 this.setDir(false, false, false, false);
                 this.setHp(0);
-                System.out.println("dead");
+                // System.out.println("dead");
                 break;
             }
         }

@@ -17,10 +17,10 @@ import javax.swing.Timer;
 
 public class Gameplay extends Screen implements KeyListener, ActionListener {
 	JFrame dp = new JFrame();
-	private int[] foodX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47,
+	private int[] foodX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475,
 			500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
-	private int[] foodY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 47, 500, 525,
-			550, 575, 600, 625 };
+	private int[] foodY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500,
+			525, 550, 575, 600, 625 };
 
 	Music music = new Music();
 
@@ -67,7 +67,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		g.drawRect(x, 74, width, height + 522);
 
 		// draw background
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.fillRect(x + 1, 75, width - 1, height + 520);
 
 		// draw scores
@@ -88,22 +88,22 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			g.drawString("Press 'Space' to Restart", 330, 340);
 		}
 		for (Food i : food) {
-			//System.out.println("food");
+			System.out.println(i);
 			i.render(g);
 		}
 		snake.render(g);
-		//System.out.println("repaint");
+		// System.out.println("repaint");
 	}
 
 	public void startThread() {
 		food.add(appleGen());
-		//System.out.println("aaaa");
+		// System.out.println("aaaa");
 		Thread movement = new Thread() {
 			public void run() {
-				while (snake.getHp()>0) {
+				while (snake.getHp() > 0) {
 					snake.move();
 					foodGen();
-					System.out.println(food);
+					checkBoard();
 					repaint();
 					try {
 						Thread.sleep(100);
@@ -111,8 +111,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 						e.printStackTrace();
 					}
 				}
-				if (snake.getHp()==0)
-				{
+				if (snake.getHp() == 0) {
 					music.stopAll();
 					music.playSFX("src/assets/music/dead.wav");
 				}
@@ -120,21 +119,22 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		};
 		movement.start();
 	}
-	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_UP && snake.down!=true) {
+		if (e.getKeyCode() == KeyEvent.VK_UP && snake.down != true) {
 			snake.setDir(false, false, true, false);
-		} else if (e.getKeyCode() == KeyEvent.VK_LEFT && snake.right!=true) {
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT && snake.right != true) {
 			snake.setDir(true, false, false, false);
-		} else if (e.getKeyCode() == KeyEvent.VK_DOWN && snake.up!=true) {
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN && snake.up != true) {
 			snake.setDir(false, false, false, true);
-		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && snake.left!=true) {
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && snake.left != true) {
 			snake.setDir(false, true, false, false);
+		} else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
+			restartGame();
 		}
+		
 	}
-
 
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -161,8 +161,17 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			if (food.get(i).eatenBySnake(snake)) {
 				eaten.add(i);
 
-				if (food.get(i) instanceof Apple) {
-					food.add(appleGen());
+				if (food.get(i) instanceof Food || food.size() == 0) {
+					Random rng = new Random();
+					int apple = rng.nextInt(3);
+					for (int z = 0; z < apple; z++)
+						food.add(appleGen());
+					int bombRng = rng.nextInt(100);
+					if (bombRng <= 5)
+						food.add(bombGen());
+					int rottenRng = rng.nextInt(100);
+					if (rottenRng <= 25)
+						food.add(rottenGen());
 				}
 			}
 		}
@@ -183,7 +192,38 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		Random rng = new Random();
 		int x = rng.nextInt(34);
 		int y = rng.nextInt(22);
+		System.out.println("Rotten");
 		return new Rotten(foodX[x], foodY[y]);
+	}
+
+	public Bomb bombGen() {
+		Random rng = new Random();
+		int x = rng.nextInt(34);
+		int y = rng.nextInt(22);
+		System.out.println("Bomb");
+		return new Bomb(foodX[x], foodY[y]);
+	}
+	
+	public void checkBoard() {
+		boolean flag = false;
+		for (int i = 0; i < food.size(); i++) {
+			if (food.get(i) instanceof Apple)
+			{
+				flag = true;
+			}
+		}
+		if (flag == false || food.size() == 0)
+		{
+			appleGen();
+		}
+	}
+	
+	public void restartGame() {
+		food.clear();
+		snake = new Snake(1);
+		startThread();
+		music.stopAll();
+		music.playbgMusic("bin/assets/music/bg.wav");
 	}
 
 	@Override

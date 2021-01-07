@@ -21,12 +21,13 @@ public class Apple extends Food {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+
         }
     }
 
     @Override
     public void render(Graphics g) {
-        System.out.println("apple");
+        // System.out.println("apple");
         g.drawImage(super.getImage(), super.getFoodX(), super.getFoodY(), null);
     }
 

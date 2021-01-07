@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 
 import java.awt.Image;
 
-public class Bomb extends Food{
-    private String loc = "/src/assets/bomb.png";
+public class Bomb extends Food {
+    private String loc = "src\\assets\\bomb.png";
 
     public Bomb(int foodX, int foodY) {
         super(foodX, foodY);
@@ -20,6 +20,7 @@ public class Bomb extends Food{
         try {
             return ImageIO.read(new File(loc));
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -27,5 +28,11 @@ public class Bomb extends Food{
     @Override
     public void render(Graphics g) {
         g.drawImage(super.getImage(), super.getFoodX(), super.getFoodY(), null);
+    }
+
+    @Override
+    public void giveCond(Snake snake) {
+        snake.setHp(0);
+
     }
 }
