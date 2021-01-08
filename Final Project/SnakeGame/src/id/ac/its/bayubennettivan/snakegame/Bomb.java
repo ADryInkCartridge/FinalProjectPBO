@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import java.awt.Image;
 
 public class Bomb extends Food {
-    private String loc = "src\\assets\\bomb.png";
+    private String loc = "src/assets/bomb.png";
 
     public Bomb(int foodX, int foodY) {
         super(foodX, foodY);

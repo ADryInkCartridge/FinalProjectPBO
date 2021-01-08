@@ -27,7 +27,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	private ImageIcon titleImage;
 
 	private Snake snake = new Snake(1);
-	private detectCollision detect = new detectCollision();
+	private DetectCollision detect = new DetectCollision();
 	private int moves = 0;
 	private int score = 0;
 	private Timer timer;
@@ -164,19 +164,25 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 				if (food.get(i) instanceof Food) {
 					Random rng = new Random();
 					int apple = rng.nextInt(3);
-					for (int z = 0; z < apple; z++)
+					System.out.printf("Apple rng = %d\n", apple);
+					for (int z = 0; z < apple; z++) {
 						food.add(appleGen());
-					int bombRng = rng.nextInt(100);
+					}
+					int bombRng = rng.nextInt(50);
+					System.out.printf("Bomb rng = %d\n", bombRng);
 					if (bombRng <= 5)
 						food.add(bombGen());
-					int rottenRng = rng.nextInt(100);
+					int rottenRng = rng.nextInt(50);
+					System.out.printf("Rotten rng = %d\n", rottenRng);
 					if (rottenRng <= 25)
 						food.add(rottenGen());
 				}
 			}
 		}
 
-		for (int i : eaten) {
+		for (
+
+		int i : eaten) {
 			food.remove(i);
 		}
 	}
@@ -185,6 +191,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		Random rng = new Random();
 		int x = rng.nextInt(34);
 		int y = rng.nextInt(22);
+		System.out.printf("Apple on [%d][%d]\n", foodX[x], foodY[y]);
 		return new Apple(foodX[x], foodY[y]);
 	}
 
@@ -192,7 +199,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		Random rng = new Random();
 		int x = rng.nextInt(34);
 		int y = rng.nextInt(22);
-		System.out.println("Rotten");
+		System.out.printf("Rotten on [%d][%d]\n", foodX[x], foodY[y]);
 		return new Rotten(foodX[x], foodY[y]);
 	}
 
@@ -200,7 +207,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		Random rng = new Random();
 		int x = rng.nextInt(34);
 		int y = rng.nextInt(22);
-		System.out.println("Bomb");
+		System.out.printf("Bomb on [%d][%d]\n", foodX[x], foodY[y]);
 		return new Bomb(foodX[x], foodY[y]);
 	}
 
@@ -212,7 +219,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			}
 		}
 		if (flag == false || food.size() == 0) {
-			System.out.println("genset");
+			System.out.println("------genset------");
 			food.add(appleGen());
 		}
 	}

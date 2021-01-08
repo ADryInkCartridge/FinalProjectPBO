@@ -10,7 +10,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Rotten extends Food {
-    private String loc = "src\\assets\\rotten.png";
+    private String loc = "src/assets/rotten.png";
 
     public Rotten(int foodX, int foodY) {
         super(foodX, foodY);
@@ -29,7 +29,7 @@ public class Rotten extends Food {
     @Override
     public void render(Graphics g) {
         g.drawImage(super.getImage(), super.getFoodX(), super.getFoodY(), null);
-        //System.out.println("Rot");
+        // System.out.println("Rot");
     }
 
     @Override
