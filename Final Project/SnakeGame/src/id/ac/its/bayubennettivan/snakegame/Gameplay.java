@@ -177,7 +177,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 						food.add(bombGen());
 					int rottenRng = rng.nextInt(50);
 					System.out.printf("Rotten rng = %d\n", rottenRng);
-					if (rottenRng <= 50)
+					if (rottenRng <= 17)
 						food.add(rottenGen());
 				}
 			}
