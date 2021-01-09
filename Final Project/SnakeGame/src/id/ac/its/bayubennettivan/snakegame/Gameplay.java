@@ -25,6 +25,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	Music music = new Music();
 
 	private ImageIcon titleImage;
+	private ImageIcon background;
 
 	private Snake snake = new Snake(1);
 	private DetectCollision detect = new DetectCollision();
@@ -67,8 +68,10 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		g.drawRect(x, 74, width, height + 522);
 
 		// draw background
-		g.setColor(Color.WHITE);
-		g.fillRect(x + 1, 75, width - 1, height + 520);
+		// g.setColor(Color.WHITE);
+		// g.fillRect(x + 1, 75, width - 1, height + 520);
+		background = new ImageIcon("src/assets/background.png");
+		background.paintIcon(this, g, x + 1, 75);
 
 		// draw scores
 		g.setColor(Color.WHITE);
@@ -170,11 +173,11 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 					}
 					int bombRng = rng.nextInt(50);
 					System.out.printf("Bomb rng = %d\n", bombRng);
-					if (bombRng <= 5)
+					if (bombRng <= 7)
 						food.add(bombGen());
 					int rottenRng = rng.nextInt(50);
 					System.out.printf("Rotten rng = %d\n", rottenRng);
-					if (rottenRng <= 25)
+					if (rottenRng <= 50)
 						food.add(rottenGen());
 				}
 			}

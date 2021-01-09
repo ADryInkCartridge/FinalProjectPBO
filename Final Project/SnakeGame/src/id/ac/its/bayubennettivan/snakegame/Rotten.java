@@ -34,7 +34,11 @@ public class Rotten extends Food {
 
     @Override
     public void giveCond(Snake snake) {
-        snake.delBody();
+        if (snake.getLen() > 1) {
+            snake.delBody();
+        } else {
+            snake.setHp(0);
+        }
 
     }
 }
