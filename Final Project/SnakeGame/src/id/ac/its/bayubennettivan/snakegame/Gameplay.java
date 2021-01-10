@@ -28,7 +28,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	private ImageIcon background;
 
 	private Snake snake = new Snake(1);
-	private DetectCollision detect = new DetectCollision();
+	private detectCollision detect = new detectCollision();
 	private int moves = 0;
 	private int score = 0;
 	private Timer timer;
