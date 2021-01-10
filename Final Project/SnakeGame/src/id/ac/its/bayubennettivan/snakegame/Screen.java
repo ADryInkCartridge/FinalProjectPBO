@@ -2,6 +2,7 @@ package id.ac.its.bayubennettivan.snakegame;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,6 +11,7 @@ public abstract class Screen extends JPanel {
 
     JFrame referred;
     public final static int PANEL_WIDTH = 905, PANEL_HEIGHT = 700;
+    private Image screenImg; 
 
     public Screen(JFrame referred) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -25,5 +27,13 @@ public abstract class Screen extends JPanel {
         super.paintComponent(g);
         render(g);
     }
+
+    public Image getImage() {
+        return this.screenImg;
+    }
+
+	public void setImg(Image screenImg) {
+        this.screenImg = screenImg;
+	}
 
 }
