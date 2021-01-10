@@ -46,7 +46,7 @@ public class Gameover extends Screen {
     @Override
     public void stateChange(int state) {
         if(state == 0) {
-			referred.setContentPane(new MainMenu(referred));
+			referred.setContentPane(new MainMenu(referred, screenImg, screenImg));
 			referred.validate();
 			referred.getContentPane().requestFocusInWindow();
 		}

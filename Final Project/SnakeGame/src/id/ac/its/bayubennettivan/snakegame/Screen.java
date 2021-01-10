@@ -11,7 +11,7 @@ public abstract class Screen extends JPanel {
 
     JFrame referred;
     public final static int PANEL_WIDTH = 905, PANEL_HEIGHT = 700;
-    private Image screenImg; 
+    protected Image screenImg; 
 
     public Screen(JFrame referred) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
