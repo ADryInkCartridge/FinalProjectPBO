@@ -26,7 +26,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	private ImageIcon titleImage;
 	private ImageIcon background;
-
+	private int difficulty = 1;
 	private Snake snake = new Snake(1);
 	private detectCollision detect = new detectCollision();
 	// private int moves = 0;
@@ -38,7 +38,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	private int x = 24;
 	private int y = 10;
 	List<Food> food = new ArrayList<>();
-	List<Character> userinput = new ArrayList<>();
+	List<SpriteNonBuffered> spriteNonBuffer = new ArrayList<>();
 
 	public Gameplay(JFrame referred) {
 		super(referred);
@@ -47,8 +47,16 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		setFocusTraversalKeysEnabled(false);
 		timer = new Timer(delay, this);
 		timer.start();
-		music.playbgMusic("bin/assets/music/bg.wav");
+		switch (difficulty) {
+			case 1:
+				music.playbgMusic("bin/assets/music/bg.wav");
+				break;
+			case 2:
+				music.playbgMusic("bin/assets/music/bg2.wav");
+				break;
+		}
 		startThread();
+		spriteThread();
 	}
 
 	@Override
@@ -70,7 +78,15 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		// draw background
 		// g.setColor(Color.WHITE);
 		// g.fillRect(x + 1, 75, width - 1, height + 520);
-		background = new ImageIcon("src/assets/background.png");
+
+		switch (difficulty) {
+			case 1:
+				background = new ImageIcon("src/assets/background.png");
+				break;
+			case 2:
+				background = new ImageIcon("src/assets/LavaBG.png");
+				break;
+		}
 		background.paintIcon(this, g, x + 1, 75);
 
 		// draw scores
@@ -94,19 +110,44 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			// System.out.println(i);
 			i.render(g);
 		}
+		for (SpriteNonBuffered i : spriteNonBuffer) {
+			i.render(g);
+		}
 		snake.render(g);
 		// System.out.println("repaint");
+	}
+
+	public void spriteThread() {
+		Thread sprites = new Thread(new Runnable() {
+			public void run() {
+				while (snake.getHp() > 0) {
+					for (SpriteNonBuffered i : spriteNonBuffer) {
+						i.framecounter();
+					}
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		sprites.start();
 	}
 
 	public void startThread() {
 		food.add(appleGen());
 		// System.out.println("aaaa");
-		Thread movement = new Thread() {
+		Thread movement = new Thread(new Runnable() {
 			public void run() {
 				while (snake.getHp() > 0) {
 					snake.move();
 					foodGen();
+					System.out.println(spriteNonBuffer);
 					checkBoard();
+					if (difficulty == 2) {
+						nonBufferGen();
+					}
 					repaint();
 					try {
 						Thread.sleep(100);
@@ -119,7 +160,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 					music.playSFX("src/assets/music/dead.wav");
 				}
 			}
-		};
+		});
 		movement.start();
 	}
 
@@ -183,10 +224,34 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			}
 		}
 
-		for (
-
-		int i : eaten) {
+		for (int i : eaten) {
 			food.remove(i);
+		}
+
+	}
+
+	public void nonBufferGen() {
+		List<Integer> dissapear = new ArrayList<>();
+		for (int i = 0; i < spriteNonBuffer.size(); i++) {
+			spriteNonBuffer.get(i).tick(snake);
+			if (spriteNonBuffer.get(i).getLoop() > 2) {
+				dissapear.add(i);
+			}
+		}
+		for (int i : dissapear) {
+			spriteNonBuffer.remove(i);
+		}
+		int fireInstance = 0;
+		if (snake.getLen() > 5) {
+			int modifier = 3;
+			for (SpriteNonBuffered i : spriteNonBuffer) {
+				if (i instanceof Fire) {
+					fireInstance++;
+				}
+			}
+			if (fireInstance < snake.getLen() / modifier) {
+				spriteNonBuffer.add(fireGen());
+			}
 		}
 	}
 
@@ -215,8 +280,12 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	}
 
 	public void checkBoard() {
+		int z = 0;
 		boolean flag = false;
 		for (Food i : food) {
+			if (i instanceof Rotten) {
+				z++;
+			}
 			if (i instanceof Apple) {
 				flag = true;
 			}
@@ -224,6 +293,13 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		if (flag == false || food.size() == 0) {
 			System.out.println("------genset------");
 			food.add(appleGen());
+		}
+		if (z > 10) {
+			for (Food i : food) {
+				if (i instanceof Rotten) {
+					food.remove(i);
+				}
+			}
 		}
 	}
 
@@ -233,6 +309,24 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		startThread();
 		music.stopAll();
 		music.playbgMusic("bin/assets/music/bg.wav");
+	}
+
+	public Fire fireGen() {
+		Random rng = new Random();
+		boolean flag = true;
+		int x = 0;
+		int y = 0;
+		while (flag) {
+			x = rng.nextInt(34);
+			y = rng.nextInt(22);
+			for (int i = 0; i < snake.getLen(); i++) {
+				if (snake.snakeX.get(i) == foodX[x] && snake.snakeY.get(i) == foodY[y]) {
+					flag = true;
+				}
+			}
+			flag = false;
+		}
+		return new Fire(3, foodX[x], foodY[y]);
 	}
 
 	@Override

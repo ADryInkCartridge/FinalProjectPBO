@@ -3,9 +3,7 @@ package id.ac.its.bayubennettivan.snakegame;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
 import java.awt.Image;
 
 public class Bomb extends Food {
