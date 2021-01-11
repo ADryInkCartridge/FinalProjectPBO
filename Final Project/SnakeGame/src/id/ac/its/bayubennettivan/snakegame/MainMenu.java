@@ -3,7 +3,6 @@ package id.ac.its.bayubennettivan.snakegame;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,6 +42,7 @@ public class MainMenu extends Screen {
         referred.setContentPane(new Gameplay(referred));
         referred.validate();
         referred.getContentPane().requestFocusInWindow();
+        // break;
     }
 
 }
