@@ -21,8 +21,8 @@ public class Gameover extends Screen {
 
     public Gameover(JFrame referred) {
         super(referred);
-        super.setImg(this.getImage("src/assets/GameOver.jpg"));
-        super.setImg(this.getImage("src/assets/OKButton.png"));
+        gameOverBanner = this.getImage("src/assets/GameOver.jpg");
+        okayButton = this.getImage("src/assets/OKButton.png");
 
     }
 
@@ -45,11 +45,11 @@ public class Gameover extends Screen {
 
     @Override
     public void stateChange(int state) {
-        if(state == 0) {
-			referred.setContentPane(new MainMenu(referred, screenImg, screenImg));
-			referred.validate();
-			referred.getContentPane().requestFocusInWindow();
-		}
+        if (state == 0) {
+            referred.setContentPane(new MainMenu(referred));
+            referred.validate();
+            referred.getContentPane().requestFocusInWindow();
+        }
 
     }
 

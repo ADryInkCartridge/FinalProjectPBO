@@ -14,13 +14,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class MainMenu extends Screen{
+public class MainMenu extends Screen {
     private Image backgroundMenu, newGameBtn;
 
-    public MainMenu(JFrame referred, Image backgroundMenu, Image newGameBtn) {
+    public MainMenu(JFrame referred) {
         super(referred);
-        super.setImg(this.getImage("src/assets/background.png"));
-        super.setImg(this.getImage("src/assets/NewGame.png"));
+        backgroundMenu = this.getImage("src/assets/background.png");
+        newGameBtn = this.getImage("src/assets/NewGame.png");
     }
 
     private Image getImage(String filename) {
@@ -41,11 +41,8 @@ public class MainMenu extends Screen{
     @Override
     public void stateChange(int state) {
         referred.setContentPane(new Gameplay(referred));
-		referred.validate();
-		referred.getContentPane().requestFocusInWindow();
-		break;
+        referred.validate();
+        referred.getContentPane().requestFocusInWindow();
     }
 
-    
-    
 }
