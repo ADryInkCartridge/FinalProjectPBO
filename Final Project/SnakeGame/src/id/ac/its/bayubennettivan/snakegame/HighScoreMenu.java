@@ -14,8 +14,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class HighScoreMenu extends Screen
-{
+public class HighScoreMenu extends Screen {
     private Image backgroundHighScore, backMenu;
     private List<User> playerScore;
 
@@ -26,7 +25,7 @@ public class HighScoreMenu extends Screen
         this.playerScore = User.load("score.txt");
     }
 
-	private Image getImage(String filename) {
+    private Image getImage(String filename) {
         try {
             return ImageIO.read(new File(filename));
         } catch (IOException e) {
@@ -43,13 +42,13 @@ public class HighScoreMenu extends Screen
 
     @Override
     public void stateChange(int state) {
-        switch(state) {
+        switch (state) {
             case 0:
                 referred.setContentPane(new MainMenu(referred));
                 referred.validate();
                 referred.getContentPane().requestFocusInWindow();
                 break;
-            }
+        }
     }
-    
+
 }
