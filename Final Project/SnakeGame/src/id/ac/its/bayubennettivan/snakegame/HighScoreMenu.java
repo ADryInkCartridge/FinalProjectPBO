@@ -15,24 +15,25 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class HighScoreMenu extends Screen {
+    private final static String DEFAULT_LOCATION = "src/assets/";
     private Image backgroundHighScore, backMenu;
     private List<User> playerScore;
 
-    public HighScoreMenu(JFrame referred, Image backgroundHighScore, Image backMenu) {
+    public HighScoreMenu(JFrame referred) {
         super(referred);
-        super.setImg(this.getImage("src/assets/background.png"));
-        super.setImg(this.getImage("src/assets/Back.png"));
+        backgroundHighScore = this.loadImg("background.png");
+        backMenu = this.loadImg("Back.png");
         this.playerScore = User.load("score.txt");
     }
 
-    private Image getImage(String filename) {
-        try {
-            return ImageIO.read(new File(filename));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    private Image loadImg(String filename) {
+		try {
+			return ImageIO.read(new File(DEFAULT_LOCATION+filename));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
     @Override
     public void render(Graphics g) {

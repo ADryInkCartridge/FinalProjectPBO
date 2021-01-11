@@ -18,13 +18,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class MainMenu extends Screen {
+    private final static String DEFAULT_LOCATION = "src/assets/";
     private Image backgroundMenu, newGameBtn, hScoreMenu;
 
-    public MainMenu(JFrame referred, Image backgroundMenu, Image newGameBtn) {
+    public MainMenu(JFrame referred) {
         super(referred);
-        super.setImg(this.getImage("src/assets/background.png"));
-        super.setImg(this.getImage("src/assets/NewGame.png"));
-        super.setImg(this.getImage("src/assets/HighScore.png"));
+        backgroundMenu = this.loadImg("background.png");
+        newGameBtn = this.loadImg("NewGame.png");
+        hScoreMenu = this.loadImg("HighScore.png");
 
         addMouseListener((MouseListener) new MouseAdapter() {
 			@Override
@@ -43,14 +44,14 @@ public class MainMenu extends Screen {
 		});
     }
 
-    private Image getImage(String filename) {
-        try {
-            return ImageIO.read(new File(filename));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    private Image loadImg(String filename) {
+		try {
+			return ImageIO.read(new File(DEFAULT_LOCATION+filename));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
     @Override
     public void render(Graphics g) {
@@ -68,7 +69,7 @@ public class MainMenu extends Screen {
                 referred.getContentPane().requestFocusInWindow();
                 break;
             case 2:
-                referred.setContentPane(new HighScoreMenu(referred, backgroundMenu, backgroundMenu));
+                referred.setContentPane(new HighScoreMenu(referred));
                 referred.validate();
                 referred.getContentPane().requestFocusInWindow();
             }

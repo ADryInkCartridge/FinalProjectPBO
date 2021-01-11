@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Snake by Bayu Bennett Ivan");
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		Screen gs = new Gameplay(frame);
+		Screen gs = new MainMenu(frame);
 		frame.setContentPane(gs);
 		frame.setVisible(true);
 		frame.pack();
