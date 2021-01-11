@@ -3,6 +3,8 @@ package id.ac.its.bayubennettivan.snakegame;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import id.ac.its.bayubennettivan.snakegame.Snake;
@@ -19,12 +21,12 @@ public class Gameover extends Screen {
 
     public Gameover(JFrame referred) {
         super(referred);
-        okayButton = loadImg("OKButton.png");
-        gameOverBanner = loadImg("GameOver.png");
+        super.setImg(this.getImage("src/assets/GameOver.jpg"));
+        super.setImg(this.getImage("src/assets/OKButton.png"));
 
     }
 
-    private Image loadImg(String filename) {
+    private Image getImage(String filename) {
         try {
             return ImageIO.read(new File(filename));
         } catch (IOException e) {
@@ -43,7 +45,11 @@ public class Gameover extends Screen {
 
     @Override
     public void stateChange(int state) {
-        // TODO Auto-generated method stub
+        if(state == 0) {
+			referred.setContentPane(new MainMenu(referred, screenImg, screenImg));
+			referred.validate();
+			referred.getContentPane().requestFocusInWindow();
+		}
 
     }
 

@@ -10,7 +10,7 @@ import id.ac.its.bayubennettivan.snakegame.Screen;
 public class Main {
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Bayu Bennett Ivan");
+		JFrame frame = new JFrame("Snake by Bayu Bennett Ivan");
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		Screen gs = new Gameplay(frame);
 		frame.setContentPane(gs);
