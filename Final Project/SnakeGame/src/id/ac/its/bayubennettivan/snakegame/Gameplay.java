@@ -53,7 +53,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	@Override
 	public void render(Graphics g) {
-		// snake position (snakeX[0] and snakeY[0] is head
 
 		// draw title image border
 		g.setColor(Color.WHITE);
