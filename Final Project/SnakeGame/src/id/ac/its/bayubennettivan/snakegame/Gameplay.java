@@ -60,7 +60,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		g.drawRect(x, y, width, height);
 
 		// draw title image
-		titleImage = new ImageIcon("src/assets/snaketitle.jpg");
+		titleImage = new ImageIcon("src/assets/snaketitle.png");
 		titleImage.paintIcon(this, g, x + 1, y + 1);
 
 		// draw gameplay border
