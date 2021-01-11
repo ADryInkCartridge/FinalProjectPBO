@@ -3,10 +3,14 @@ package id.ac.its.bayubennettivan.snakegame;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import id.ac.its.bayubennettivan.snakegame.Snake;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,17 +18,38 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class MainMenu extends Screen {
-    private Image backgroundMenu, newGameBtn;
+    private final static String DEFAULT_LOCATION = "src/assets/";
+    private Image backgroundMenu, newGameBtn, hScoreMenu, snakeTitle;
 
     public MainMenu(JFrame referred) {
         super(referred);
-        backgroundMenu = this.getImage("src/assets/background.png");
-        newGameBtn = this.getImage("src/assets/NewGame.png");
+        backgroundMenu = this.loadImg("background.png");
+        newGameBtn = this.loadImg("NewGame.png");
+        hScoreMenu = this.loadImg("HighScore.png");
+        snakeTitle = this.loadImg("snaketitle.png");
+
+        addMouseListener((MouseListener) new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                // untuk newGameBtn
+                if (e.getPoint().x >= 295 && e.getPoint().x <= 550 && e.getPoint().y >= 265 && e.getPoint().y <= 345) {
+                    stateChange(1);
+                }
+                ;
+
+                // untuk highScoreBtn
+                if (e.getPoint().x >= 295 && e.getPoint().x <= 550 && e.getPoint().y >= 455 && e.getPoint().y <= 535) {
+                    stateChange(2);
+                }
+                ;
+            }
+        });
     }
 
-    private Image getImage(String filename) {
+    private Image loadImg(String filename) {
         try {
-            return ImageIO.read(new File(filename));
+            return ImageIO.read(new File(DEFAULT_LOCATION + filename));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -33,16 +58,25 @@ public class MainMenu extends Screen {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(backgroundMenu, 0, 0, null);
-        g.drawImage(newGameBtn, 250, 325, null);
+        g.drawImage(snakeTitle, 25, 11, null);
+        g.drawImage(backgroundMenu, 25, 75, null);
+        g.drawImage(newGameBtn, 295, 265, null);
+        g.drawImage(hScoreMenu, 295, 355, null);
     }
 
     @Override
     public void stateChange(int state) {
-        referred.setContentPane(new Gameplay(referred));
-        referred.validate();
-        referred.getContentPane().requestFocusInWindow();
-        // break;
+        switch (state) {
+            case 1:
+                referred.setContentPane(new Gameplay(referred));
+                referred.validate();
+                referred.getContentPane().requestFocusInWindow();
+                break;
+            case 2:
+                referred.setContentPane(new HighScoreMenu(referred));
+                referred.validate();
+                referred.getContentPane().requestFocusInWindow();
+        }
     }
 
 }

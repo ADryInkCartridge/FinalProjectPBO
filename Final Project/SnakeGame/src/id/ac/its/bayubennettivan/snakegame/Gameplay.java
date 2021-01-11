@@ -61,7 +61,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	@Override
 	public void render(Graphics g) {
-		// snake position (snakeX[0] and snakeY[0] is head
 
 		// draw title image border
 		g.setColor(Color.WHITE);
@@ -97,7 +96,14 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		// draw length of snake
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("arial", Font.BOLD, 25));
-		g.drawString("Length: " + snake.getLen(), 745, 45);
+		g.drawString("Length: " + snake.getLen(), 740, 45);
+
+		for (Food i : food) {
+			// System.out.println(i);
+			i.render(g);
+		}
+		snake.render(g);
+		// System.out.println("repaint");
 
 		if (snake.getHp() == 0) {
 			g.setColor(Color.WHITE);
