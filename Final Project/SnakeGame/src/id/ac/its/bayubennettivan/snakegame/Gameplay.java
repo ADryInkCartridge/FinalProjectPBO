@@ -29,8 +29,8 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	private Snake snake = new Snake(1);
 	private detectCollision detect = new detectCollision();
-	private int moves = 0;
-	private int score = 0;
+	// private int moves = 0;
+	// private int score = 0;
 	private Timer timer;
 	private int delay = 50;
 	private int width = 851;
@@ -74,21 +74,21 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		background.paintIcon(this, g, x + 1, 75);
 
 		// draw scores
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("arial", Font.PLAIN, 14));
-		g.drawString("Score: " + score, 780, 30);
+		// g.setColor(Color.WHITE);
+		// g.setFont(new Font("arial", Font.BOLD, 28));
+		// g.drawString("Score: " + score, 750, 30);
 
 		// draw length of snake
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("arial", Font.PLAIN, 14));
-		g.drawString("Length: " + snake.getLen(), 780, 50);
+		g.setFont(new Font("arial", Font.BOLD, 25));
+		g.drawString("Length: " + snake.getLen(), 745, 45);
 
 		if (snake.getHp() == 0) {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("arial", Font.BOLD, 50));
-			g.drawString("Game Over", 300, 300);
+			g.drawString("Game Over", 315, 330);
 			g.setFont(new Font("arial", Font.BOLD, 20));
-			g.drawString("Press 'Space' to Restart", 330, 340);
+			g.drawString("Press 'Space' to Restart", 340, 350);
 		}
 		for (Food i : food) {
 			// System.out.println(i);
