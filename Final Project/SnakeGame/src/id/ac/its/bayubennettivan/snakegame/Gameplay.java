@@ -26,7 +26,8 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	private ImageIcon titleImage;
 	private ImageIcon background;
-	protected int difficulty = 1;
+	private boolean isPaused = false;
+	protected int difficulty = 2;
 	private Snake snake = new Snake(1);
 	// private detectCollision detect = new detectCollision();
 	// private int moves = 0;
@@ -40,20 +41,13 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	List<Food> food = new ArrayList<>();
 	List<SpriteNonBuffered> spriteNonBuffer = new ArrayList<>();
 
-	public Gameplay(JFrame referred) {
+	public Gameplay(JFrame referred, int diff) {
 		super(referred);
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-
-		switch (difficulty) {
-			case 1:
-				music.playbgMusic("bin/assets/music/bg.wav");
-				break;
-			case 2:
-				music.playbgMusic("bin/assets/music/bg2.wav");
-				break;
-		}
+		difficulty = diff;
+		setMusic();
 		startThread();
 		spriteThread();
 
@@ -77,7 +71,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		// draw background
 		// g.setColor(Color.WHITE);
 		// g.fillRect(x + 1, 75, width - 1, height + 520);
-
+		System.out.println(difficulty + "Render");
 		switch (difficulty) {
 			case 1:
 				background = new ImageIcon("src/assets/background.png");
@@ -149,18 +143,23 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		Thread movement = new Thread(new Runnable() {
 			public void run() {
 				while (snake.getHp() > 0) {
-					snake.move();
-					foodGen();
-					System.out.println(spriteNonBuffer);
-					checkBoard();
-					if (difficulty == 2) {
-						nonBufferGen();
-					}
-					repaint();
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+					if (isPaused == false) {
+						System.out.println(difficulty + "Thread");
+						snake.move();
+						foodGen();
+						// System.out.println(spriteNonBuffer);
+						checkBoard();
+						if (difficulty == 2) {
+							nonBufferGen();
+						}
+						repaint();
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					} else  {
+						
 					}
 				}
 				if (snake.getHp() == 0) {
@@ -182,6 +181,11 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			snake.setDir(false, false, false, true);
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && snake.left != true) {
 			snake.setDir(false, true, false, false);
+		} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			if (isPaused == false)
+				isPaused = true;
+			else
+				isPaused = false;
 		} else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
 			restartGame();
 		} else if (e.getKeyCode() == KeyEvent.VK_ENTER && snake.getHp() == 0) {
@@ -318,10 +322,25 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		}
 	}
 
+	public void setMusic() {
+		switch (difficulty) {
+			case 1:
+				music.playbgMusic("bin/assets/music/bg.wav");
+				break;
+			case 2:
+				music.playbgMusic("bin/assets/music/bg2.wav");
+				break;
+		}
+	}
+
 	public void restartGame() {
 		food.clear();
+		spriteNonBuffer.clear();
 		snake = new Snake(1);
 		startThread();
+		if (difficulty == 2) {
+			spriteThread();
+		}
 		music.stopAll();
 		switch (difficulty) {
 			case 1:
@@ -349,6 +368,11 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			flag = false;
 		}
 		return new Fire(3, foodX[x], foodY[y]);
+	}
+
+	public void setDiff(int i) {
+		System.out.println(i);
+		this.difficulty = i;
 	}
 
 	@Override

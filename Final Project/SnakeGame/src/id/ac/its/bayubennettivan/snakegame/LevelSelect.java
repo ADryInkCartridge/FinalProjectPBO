@@ -67,15 +67,7 @@ public class LevelSelect extends Screen {
 
     @Override
     public void stateChange(int state) {
-        Gameplay gm = new Gameplay(referred);
-        switch (state) {
-            case 1:
-                gm.difficulty = 1;
-                break;
-            case 2:
-                gm.difficulty = 2;
-                break;
-        }
+        Gameplay gm = new Gameplay(referred,state);
         referred.setContentPane(gm);
         referred.validate();
         referred.getContentPane().requestFocusInWindow();
