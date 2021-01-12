@@ -26,13 +26,13 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	private ImageIcon titleImage;
 	private ImageIcon background;
-	private int difficulty = 2;
+	protected int difficulty = 1;
 	private Snake snake = new Snake(1);
 	// private detectCollision detect = new detectCollision();
 	// private int moves = 0;
 	// private int score = 0;
 	private Timer timer;
-	private int delay = 50;
+	// private int delay = 100;
 	private int width = 851;
 	private int height = 55;
 	private int x = 24;
@@ -45,8 +45,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-		timer = new Timer(delay, this);
-		timer.start();
+
 		switch (difficulty) {
 			case 1:
 				music.playbgMusic("bin/assets/music/bg.wav");
@@ -57,6 +56,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		}
 		startThread();
 		spriteThread();
+
 	}
 
 	@Override
@@ -120,6 +120,8 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			g.drawString("Game Over", 315, 330);
 			g.setFont(new Font("arial", Font.BOLD, 20));
 			g.drawString("Press 'Space' to Restart", 340, 350);
+			g.setFont(new Font("arial", Font.BOLD, 20));
+			g.drawString("Press 'Enter' to Switch Levels", 315, 370);
 		}
 	}
 
@@ -181,6 +183,13 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && snake.left != true) {
 			snake.setDir(false, true, false, false);
 		} else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
+			restartGame();
+		} else if (e.getKeyCode() == KeyEvent.VK_ENTER && snake.getHp() == 0) {
+			if (difficulty == 1) {
+				difficulty = 2;
+			} else {
+				difficulty = 1;
+			}
 			restartGame();
 		}
 

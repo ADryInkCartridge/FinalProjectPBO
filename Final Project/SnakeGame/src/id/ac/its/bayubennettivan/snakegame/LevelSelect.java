@@ -17,28 +17,29 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class MainMenu extends Screen {
+public class LevelSelect extends Screen {
     private final static String DEFAULT_LOCATION = "src/assets/";
-    private Image backgroundMenu, newGameBtn, hScoreMenu, snakeTitle;
+    private Image backgroundMenu, lvlOne, lvlTwo, snakeTitle;
+    Gameplay gm;
 
-    public MainMenu(JFrame referred) {
+    public LevelSelect(JFrame referred) {
         super(referred);
         backgroundMenu = this.loadImg("background.png");
-        newGameBtn = this.loadImg("NewGame.png");
-        hScoreMenu = this.loadImg("HighScore.png");
+        lvlOne = this.loadImg("lvlOne.png");
+        lvlTwo = this.loadImg("lvlTwo.png");
         snakeTitle = this.loadImg("snaketitle.png");
 
         addMouseListener((MouseListener) new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                // untuk newGameBtn
+                // untuk lvl 1
                 if (e.getPoint().x >= 295 && e.getPoint().x <= 550 && e.getPoint().y >= 265 && e.getPoint().y <= 345) {
                     stateChange(1);
                 }
                 ;
 
-                // untuk highScoreBtn
+                // untuk lvl 2
                 if (e.getPoint().x >= 295 && e.getPoint().x <= 550 && e.getPoint().y >= 355 && e.getPoint().y <= 435) {
                     stateChange(2);
                 }
@@ -60,23 +61,24 @@ public class MainMenu extends Screen {
     public void render(Graphics g) {
         g.drawImage(snakeTitle, 25, 11, null);
         g.drawImage(backgroundMenu, 25, 75, null);
-        g.drawImage(newGameBtn, 295, 265, null);
-        g.drawImage(hScoreMenu, 295, 355, null);
+        g.drawImage(lvlOne, 295, 265, null);
+        g.drawImage(lvlTwo, 295, 355, null);
     }
 
     @Override
     public void stateChange(int state) {
+        Gameplay gm = new Gameplay(referred);
         switch (state) {
             case 1:
-                referred.setContentPane(new LevelSelect(referred));
-                referred.validate();
-                referred.getContentPane().requestFocusInWindow();
+                gm.difficulty = 1;
                 break;
             case 2:
-                referred.setContentPane(new HighScoreMenu(referred));
-                referred.validate();
-                referred.getContentPane().requestFocusInWindow();
+                gm.difficulty = 2;
+                break;
         }
+        referred.setContentPane(gm);
+        referred.validate();
+        referred.getContentPane().requestFocusInWindow();
     }
 
 }
