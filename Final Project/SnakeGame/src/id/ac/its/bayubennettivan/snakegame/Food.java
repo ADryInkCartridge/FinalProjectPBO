@@ -18,7 +18,7 @@ public abstract class Food {
     public boolean eatenBySnake(Snake snake) {
         if (snake.headX() == this.foodX && snake.headY() == this.foodY) {
             this.giveCond(snake);
-            sfx.playSFX("src\\assets\\music\\SFX\\eat.wav");
+            sfx.playSFX("src/assets/music/SFX/eat.wav");
             return true;
         }
         return false;
