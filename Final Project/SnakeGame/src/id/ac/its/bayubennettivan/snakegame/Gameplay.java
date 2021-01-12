@@ -26,9 +26,9 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	private ImageIcon titleImage;
 	private ImageIcon background;
-	private int difficulty = 1;
+	private int difficulty = 2;
 	private Snake snake = new Snake(1);
-	private detectCollision detect = new detectCollision();
+	// private detectCollision detect = new detectCollision();
 	// private int moves = 0;
 	// private int score = 0;
 	private Timer timer;
@@ -105,13 +105,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		snake.render(g);
 		// System.out.println("repaint");
 
-		if (snake.getHp() == 0) {
-			g.setColor(Color.WHITE);
-			g.setFont(new Font("arial", Font.BOLD, 50));
-			g.drawString("Game Over", 315, 330);
-			g.setFont(new Font("arial", Font.BOLD, 20));
-			g.drawString("Press 'Space' to Restart", 340, 350);
-		}
 		for (Food i : food) {
 			// System.out.println(i);
 			i.render(g);
@@ -121,6 +114,13 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		}
 		snake.render(g);
 		// System.out.println("repaint");
+		if (snake.getHp() == 0) {
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("arial", Font.BOLD, 50));
+			g.drawString("Game Over", 315, 330);
+			g.setFont(new Font("arial", Font.BOLD, 20));
+			g.drawString("Press 'Space' to Restart", 340, 350);
+		}
 	}
 
 	public void spriteThread() {
@@ -314,7 +314,14 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		snake = new Snake(1);
 		startThread();
 		music.stopAll();
-		music.playbgMusic("bin/assets/music/bg.wav");
+		switch (difficulty) {
+			case 1:
+				music.playbgMusic("bin/assets/music/bg.wav");
+				break;
+			case 2:
+				music.playbgMusic("bin/assets/music/bg2.wav");
+				break;
+		}
 	}
 
 	public Fire fireGen() {
