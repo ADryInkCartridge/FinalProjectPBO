@@ -7,9 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Player implements Comparable<Player>
+public class Player implements Comparable<Player>, Serializable
 {
+    private static final long serialVersionUID = 1L;
     private int score;
     private static int compare = 0;
     
@@ -28,7 +30,7 @@ public class Player implements Comparable<Player>
     public static List<Player> load(String filename) {
 		List<Player> userScore;
 		try {
-            FileInputStream fileIn = new FileInputStream("src/com/blazingduet/covsnake/highscore/" + filename);
+            FileInputStream fileIn = new FileInputStream("src/score/" + filename);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             userScore = (List<Player>) objectIn.readObject();
             objectIn.close(); 
@@ -43,12 +45,12 @@ public class Player implements Comparable<Player>
 		return null;
     }
     
-    public static void save(List<Player> userScore, String filename) 
+    public static void save(List<Player> playerScore, String filename) 
     {
 		try {			 
           FileOutputStream fileOut = new FileOutputStream("src/score/" + filename);
           ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-          objectOut.writeObject(userScore);
+          objectOut.writeObject(playerScore);
           objectOut.close();
       } catch (IOException e) {
 

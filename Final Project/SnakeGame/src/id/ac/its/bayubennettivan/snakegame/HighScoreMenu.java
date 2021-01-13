@@ -2,6 +2,8 @@ package id.ac.its.bayubennettivan.snakegame;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.awt.Font;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,6 +12,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,13 +29,14 @@ public class HighScoreMenu extends Screen {
     private Image backgroundHS, backMenu, snakeTitle;
     private List<Player> playerScore;
     Music music = new Music();
+    Font kongtext;
 
     public HighScoreMenu(JFrame referred, long musicTime) {
         super(referred);
         music.playPausedMusic(musicTime, DEFAULT_LOCATION + "music/mainmenu.wav");
-        backgroundHS = this.loadImg("background.png");
-        backMenu = this.loadImg("Back.png");
-        snakeTitle = this.loadImg("snaketitle.png");
+        backgroundHS = loadImg("background.png");
+        backMenu = loadImg("Back.png");
+        snakeTitle = loadImg("snaketitle.png");
 
         this.playerScore = Player.load("score.txt");
         if (playerScore == null) {
@@ -65,9 +69,9 @@ public class HighScoreMenu extends Screen {
         g.drawImage(snakeTitle, 25, 11, null);
         g.drawImage(backgroundHS, 25, 75, null);
         g.drawImage(backMenu, 295, 550, null);
-        g.setColor(Color.WHITE);
         g.setFont(new Font("arial", Font.BOLD, 50));
-		int startX = 100, startY = 200;
+        g.setColor(Color.WHITE);
+		int startX = 295, startY = 300;
 		for(int i = 0; i < playerScore.size() && i < 5; i++) {
 			StringBuffer sb = new StringBuffer();
 			sb.append(i+1 + ". " + playerScore.get(i).getScore() + " points");
