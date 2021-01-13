@@ -115,9 +115,11 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			g.setFont(new Font("arial", Font.BOLD, 50));
 			g.drawString("Game Over", 315, 330);
 			g.setFont(new Font("arial", Font.BOLD, 20));
-			g.drawString("Press 'Space' to Restart", 340, 350);
+			g.drawString("Press 'BackSpace' to Main Menu", 305, 370);
 			g.setFont(new Font("arial", Font.BOLD, 20));
-			g.drawString("Press 'Enter' to Switch Levels", 315, 370);
+			g.drawString("Press 'Space' to Restart", 340, 390);
+			g.setFont(new Font("arial", Font.BOLD, 20));
+			g.drawString("Press 'Enter' to Switch Levels", 315, 410);
 		}
 	}
 
@@ -210,6 +212,11 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 				difficulty = 1;
 			}
 			restartGame();
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && snake.getHp() == 0)
+		{
+			saveScore();
+			stateChange(0);
 		}
 
 	}
@@ -392,6 +399,14 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	@Override
 	public void stateChange(int state) {
+		switch (state) {
+            case 0:
+                music.stopAll();
+                referred.setContentPane(new MainMenu(referred));
+                referred.validate();
+                referred.getContentPane().requestFocusInWindow();
+                break;
+        }
 	}
 
 	
