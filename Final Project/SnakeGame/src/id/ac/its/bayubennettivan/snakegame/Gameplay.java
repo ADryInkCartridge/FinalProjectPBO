@@ -3,21 +3,30 @@ package id.ac.its.bayubennettivan.snakegame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Collections;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class Gameplay extends Screen implements KeyListener, ActionListener {
 	JFrame dp = new JFrame();
+	private final static String DEFAULT_LOCATION = "src/assets/";
 	private int[] foodX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475,
 			500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850 };
 	private int[] foodY = { 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500,
@@ -27,6 +36,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	private ImageIcon titleImage;
 	private ImageIcon background;
+	private Image okButton;
 	private boolean isPaused = false;
 	protected int difficulty = 2;
 	private Snake snake = new Snake(1);
@@ -42,6 +52,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	private int y = 10;
 	List<Food> food = new ArrayList<>();
 	List<SpriteNonBuffered> spriteNonBuffer = new ArrayList<>();
+	private JTextField playerName;
 
 	public Gameplay(JFrame referred, int diff) {
 		super(referred);
@@ -52,12 +63,13 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		setMusic();
 		startThread();
 		spriteThread();
-
+		okButton = loadImg("OKButton.png");
+		playerName = new JTextField();
 	}
 
 	@Override
 	public void render(Graphics g) {
-
+	
 		// draw title image border
 		g.setColor(Color.WHITE);
 		g.drawRect(x, y, width, height);
@@ -109,20 +121,33 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			i.render(g);
 		}
 		snake.render(g);
+
 		// System.out.println("repaint");
 		if (snake.getHp() == 0) {
+			g.drawImage(okButton, 665, 335, null);
 			g.setColor(Color.WHITE);
-			g.setFont(new Font("arial", Font.BOLD, 50));
-			g.drawString("Game Over", 315, 330);
-			g.setFont(new Font("arial", Font.BOLD, 20));
-			g.drawString("Press 'BackSpace' to Main Menu", 305, 370);
-			g.setFont(new Font("arial", Font.BOLD, 20));
-			g.drawString("Press 'Space' to Restart", 340, 390);
-			g.setFont(new Font("arial", Font.BOLD, 20));
-			g.drawString("Press 'Enter' to Switch Levels", 315, 410);
+			g.setFont(new Font("arial", Font.BOLD, 70));
+			g.drawString("Game Over", 265, 150);
+			g.setFont(new Font("arial", Font.BOLD, 35));
+			g.drawString("Enter Your Name", 155, 360);
+			// g.setFont(new Font("arial", Font.BOLD, 20));
+			// g.drawString("Press 'BackSpace' to Main Menu", 305, 370);
+			// g.setFont(new Font("arial", Font.BOLD, 20));
+			// g.drawString("Press 'Space' to Restart", 340, 390);
+			// g.setFont(new Font("arial", Font.BOLD, 20));
+			// g.drawString("Press 'Enter' to Switch Levels", 315, 410);
 		}
 	}
 
+	private Image loadImg(String filename) {
+        try {
+            return ImageIO.read(new File(DEFAULT_LOCATION + filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+	
 	public void spriteThread() {
 		Thread sprites = new Thread(new Runnable() {
 			public void run() {
@@ -168,12 +193,40 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 					}
 				}
 				if (snake.getHp() == 0) {
+					gameOver();
 					music.stopAll();
 					music.playSFX("src/assets/music/dead.wav");
 				}
 			}
 		});
 		movement.start();
+	}
+
+	private void gameOver()
+	{
+		snake.setHp(0);
+		playerName.setBounds(470,335,150,30);
+		this.add(playerName);
+		playerName.requestFocus();
+		Gameplay temp = this;
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getX() >= 665 && e.getX() <= 740 && e.getY() >= 335 && e.getY() <= 365) {
+					if(playerName.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(temp, "The field is empty");
+					}
+					else if(playerName.getText().length() > 8) {
+						JOptionPane.showMessageDialog(temp, "Maximum number of characters is 8");
+					}
+					else
+					{
+						saveScore();
+						stateChange(0);
+					} 
+				}
+			}
+		});
 	}
 
 	@Override
@@ -201,23 +254,24 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 						break;
 				}
 			}
-		} else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
-			saveScore();
-			restartGame();
-		} else if (e.getKeyCode() == KeyEvent.VK_ENTER && snake.getHp() == 0) {
-			saveScore();
-			if (difficulty == 1) {
-				difficulty = 2;
-			} else {
-				difficulty = 1;
-			}
-			restartGame();
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && snake.getHp() == 0)
-		{
-			saveScore();
-			stateChange(0);
-		}
+		// } else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
+		// 	saveScore();
+		// 	restartGame();
+		// } else if (e.getKeyCode() == KeyEvent.VK_ENTER && snake.getHp() == 0) {
+		// 	saveScore();
+		// 	if (difficulty == 1) {
+		// 		difficulty = 2;
+		// 	} else {
+		// 		difficulty = 1;
+		// 	}
+		// 	restartGame();
+		// }
+		// else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && snake.getHp() == 0)
+		// {
+		// 	saveScore();
+		// 	stateChange(0);
+		// }
 
 	}
 
@@ -417,7 +471,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		if(playerScore == null) {
 			playerScore = new ArrayList<>();
 		}		
-		playerScore.add(new Player(snake.getLen()));		
+		playerScore.add(new Player(snake.getLen(), playerName.getText()));
 		Collections.sort(playerScore);			
 		Player.save(playerScore, "score.txt");
 	}

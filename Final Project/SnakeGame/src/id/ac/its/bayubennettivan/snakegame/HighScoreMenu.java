@@ -71,10 +71,10 @@ public class HighScoreMenu extends Screen {
         g.drawImage(backMenu, 295, 550, null);
         g.setFont(new Font("arial", Font.BOLD, 50));
         g.setColor(Color.WHITE);
-		int startX = 295, startY = 300;
+		int startX = 255, startY = 275;
 		for(int i = 0; i < playerScore.size() && i < 5; i++) {
 			StringBuffer sb = new StringBuffer();
-			sb.append(i+1 + ". " + playerScore.get(i).getScore() + " points");
+			sb.append(i+1 + ". " + playerScore.get(i).getNama() + " " + playerScore.get(i).getScore() + " points");
             g.drawString(sb.toString(), startX, startY + 50 * i);
         }
     }

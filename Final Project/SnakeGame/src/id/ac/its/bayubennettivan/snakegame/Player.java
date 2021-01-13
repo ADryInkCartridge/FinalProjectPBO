@@ -9,14 +9,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class Player implements Comparable<Player>, Serializable
-{
+public class Player implements Comparable<Player>, Serializable {
     private static final long serialVersionUID = 1L;
     private int score;
+    private String nama;
     private static int compare = 0;
-    
-    public Player(int score) {
+
+    public Player(int score, String nama) {
         this.score = score;
+        this.nama = nama;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public int getScore() {
