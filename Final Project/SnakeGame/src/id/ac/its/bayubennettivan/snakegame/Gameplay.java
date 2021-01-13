@@ -32,6 +32,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	// private detectCollision detect = new detectCollision();
 	// private int moves = 0;
 	// private int score = 0;
+	long pauseTime = 0;
 	private Timer timer;
 	// private int delay = 100;
 	private int width = 851;
@@ -143,6 +144,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		Thread movement = new Thread(new Runnable() {
 			public void run() {
 				while (snake.getHp() > 0) {
+					System.out.println(isPaused);
 					if (isPaused == false) {
 						System.out.println(difficulty + "Thread");
 						snake.move();
@@ -158,8 +160,8 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-					} else  {
-						
+					} else {
+
 					}
 				}
 				if (snake.getHp() == 0) {
@@ -182,10 +184,20 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && snake.left != true) {
 			snake.setDir(false, true, false, false);
 		} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			if (isPaused == false)
+			if (isPaused == false) {
 				isPaused = true;
-			else
+				pauseTime = music.pauseMusic();
+			} else {
 				isPaused = false;
+				switch (difficulty) {
+					case 1:
+						music.playPausedMusic(pauseTime, "bin/assets/music/bg.wav");
+						break;
+					case 2:
+						music.playPausedMusic(pauseTime, "bin/assets/music/bg2.wav");
+						break;
+				}
+			}
 		} else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
 			restartGame();
 		} else if (e.getKeyCode() == KeyEvent.VK_ENTER && snake.getHp() == 0) {

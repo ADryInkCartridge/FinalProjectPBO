@@ -20,9 +20,11 @@ import javax.imageio.ImageIO;
 public class MainMenu extends Screen {
     private final static String DEFAULT_LOCATION = "src/assets/";
     private Image backgroundMenu, newGameBtn, hScoreMenu, snakeTitle;
+    Music music = new Music();
 
     public MainMenu(JFrame referred) {
         super(referred);
+        music.playbgMusic(DEFAULT_LOCATION + "music/mainmenu.wav");
         backgroundMenu = this.loadImg("background.png");
         newGameBtn = this.loadImg("NewGame.png");
         hScoreMenu = this.loadImg("HighScore.png");
@@ -68,14 +70,15 @@ public class MainMenu extends Screen {
     public void stateChange(int state) {
         switch (state) {
             case 1:
-                referred.setContentPane(new LevelSelect(referred));
+                referred.setContentPane(new LevelSelect(referred, music.pauseMusic()));
                 referred.validate();
                 referred.getContentPane().requestFocusInWindow();
                 break;
             case 2:
-                referred.setContentPane(new HighScoreMenu(referred));
+                referred.setContentPane(new HighScoreMenu(referred, music.pauseMusic()));
                 referred.validate();
                 referred.getContentPane().requestFocusInWindow();
+                break;
         }
     }
 

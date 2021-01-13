@@ -21,9 +21,11 @@ public class LevelSelect extends Screen {
     private final static String DEFAULT_LOCATION = "src/assets/";
     private Image backgroundMenu, lvlOne, lvlTwo, snakeTitle;
     Gameplay gm;
+    Music music = new Music();
 
-    public LevelSelect(JFrame referred) {
+    public LevelSelect(JFrame referred, long musicTime) {
         super(referred);
+        music.playPausedMusic(musicTime, DEFAULT_LOCATION + "music/mainmenu.wav");
         backgroundMenu = this.loadImg("background.png");
         lvlOne = this.loadImg("lvlOne.png");
         lvlTwo = this.loadImg("lvlTwo.png");
@@ -67,7 +69,8 @@ public class LevelSelect extends Screen {
 
     @Override
     public void stateChange(int state) {
-        Gameplay gm = new Gameplay(referred,state);
+        music.stopAll();
+        Gameplay gm = new Gameplay(referred, state);
         referred.setContentPane(gm);
         referred.validate();
         referred.getContentPane().requestFocusInWindow();
