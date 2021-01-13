@@ -40,12 +40,8 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	private boolean isPaused = false;
 	protected int difficulty = 2;
 	private Snake snake = new Snake(1);
-	// private detectCollision detect = new detectCollision();
-	// private int moves = 0;
-	// private int score = 0;
 	long pauseTime = 0;
 	private Timer timer;
-	// private int delay = 100;
 	private int width = 851;
 	private int height = 55;
 	private int x = 24;
@@ -83,8 +79,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		g.drawRect(x, 74, width, height + 522);
 
 		// draw background
-		// g.setColor(Color.WHITE);
-		// g.fillRect(x + 1, 75, width - 1, height + 520);
 		System.out.println(difficulty + "Render");
 		switch (difficulty) {
 			case 1:
@@ -96,25 +90,17 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		}
 		background.paintIcon(this, g, x + 1, 75);
 
-		// draw scores
-		// g.setColor(Color.WHITE);
-		// g.setFont(new Font("arial", Font.BOLD, 28));
-		// g.drawString("Score: " + score, 750, 30);
-
 		// draw length of snake
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("arial", Font.BOLD, 25));
 		g.drawString("Length: " + snake.getLen(), 740, 45);
 
 		for (Food i : food) {
-			// System.out.println(i);
 			i.render(g);
 		}
 		snake.render(g);
-		// System.out.println("repaint");
 
 		for (Food i : food) {
-			// System.out.println(i);
 			i.render(g);
 		}
 		for (SpriteNonBuffered i : spriteNonBuffer) {
@@ -122,7 +108,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		}
 		snake.render(g);
 
-		// System.out.println("repaint");
 		if (snake.getHp() == 0) {
 			g.drawImage(okButton, 665, 335, null);
 			g.setColor(Color.WHITE);
@@ -130,12 +115,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			g.drawString("Game Over", 265, 150);
 			g.setFont(new Font("arial", Font.BOLD, 35));
 			g.drawString("Enter Your Name", 155, 360);
-			// g.setFont(new Font("arial", Font.BOLD, 20));
-			// g.drawString("Press 'BackSpace' to Main Menu", 305, 370);
-			// g.setFont(new Font("arial", Font.BOLD, 20));
-			// g.drawString("Press 'Space' to Restart", 340, 390);
-			// g.setFont(new Font("arial", Font.BOLD, 20));
-			// g.drawString("Press 'Enter' to Switch Levels", 315, 410);
 		}
 	}
 
@@ -168,7 +147,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	public void startThread() {
 		food.add(appleGen());
-		// System.out.println("aaaa");
 		Thread movement = new Thread(new Runnable() {
 			public void run() {
 				while (snake.getHp() > 0) {
@@ -177,7 +155,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 						System.out.println(difficulty + "Thread");
 						snake.move();
 						foodGen();
-						// System.out.println(spriteNonBuffer);
 						checkBoard();
 						if (difficulty == 2) {
 							nonBufferGen();
@@ -255,23 +232,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 				}
 			}
 		}
-		// } else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
-		// 	saveScore();
-		// 	restartGame();
-		// } else if (e.getKeyCode() == KeyEvent.VK_ENTER && snake.getHp() == 0) {
-		// 	saveScore();
-		// 	if (difficulty == 1) {
-		// 		difficulty = 2;
-		// 	} else {
-		// 		difficulty = 1;
-		// 	}
-		// 	restartGame();
-		// }
-		// else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && snake.getHp() == 0)
-		// {
-		// 	saveScore();
-		// 	stateChange(0);
-		// }
 
 	}
 

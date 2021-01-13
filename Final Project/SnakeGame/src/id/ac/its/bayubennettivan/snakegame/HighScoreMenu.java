@@ -1,23 +1,17 @@
 package id.ac.its.bayubennettivan.snakegame;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.Font;
 import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import id.ac.its.bayubennettivan.snakegame.Snake;
+import javax.swing.JFrame;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.io.File;
 import java.io.IOException;

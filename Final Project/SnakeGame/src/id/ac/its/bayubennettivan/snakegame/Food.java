@@ -2,8 +2,6 @@ package id.ac.its.bayubennettivan.snakegame;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.Random;
-import javax.swing.ImageIcon;
 
 public abstract class Food {
 

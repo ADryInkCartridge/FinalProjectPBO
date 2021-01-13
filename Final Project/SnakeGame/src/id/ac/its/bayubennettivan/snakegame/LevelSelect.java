@@ -1,16 +1,12 @@
 package id.ac.its.bayubennettivan.snakegame;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import id.ac.its.bayubennettivan.snakegame.Snake;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JFrame;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,13 +1,11 @@
 package id.ac.its.bayubennettivan.snakegame;
 
 import java.awt.Graphics;
+import java.awt.Image;
+
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
-import java.awt.Image;
-import javax.swing.ImageIcon;
 
 public class Rotten extends Food {
     private String loc = "src/assets/rotten.png";
@@ -29,7 +27,6 @@ public class Rotten extends Food {
     @Override
     public void render(Graphics g) {
         g.drawImage(super.getImage(), super.getFoodX(), super.getFoodY(), null);
-        // System.out.println("Rot");
     }
 
     @Override
