@@ -23,7 +23,6 @@ public class HighScoreMenu extends Screen {
     private Image backgroundHS, backMenu, snakeTitle;
     private List<Player> playerScore;
     Music music = new Music();
-    Font kongtext;
 
     public HighScoreMenu(JFrame referred, long musicTime) {
         super(referred);
