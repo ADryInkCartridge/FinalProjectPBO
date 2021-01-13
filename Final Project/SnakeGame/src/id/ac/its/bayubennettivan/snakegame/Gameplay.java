@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Collections;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -199,8 +200,10 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 				}
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_SPACE && snake.getHp() == 0) {
+			saveScore();
 			restartGame();
 		} else if (e.getKeyCode() == KeyEvent.VK_ENTER && snake.getHp() == 0) {
+			saveScore();
 			if (difficulty == 1) {
 				difficulty = 2;
 			} else {
@@ -391,4 +394,16 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	public void stateChange(int state) {
 	}
 
+	
+	private void saveScore()
+	{
+		List<Player> playerScore = Player.load("score.txt");
+		Player.setCompare(0);
+		if(playerScore == null) {
+			playerScore = new ArrayList<>();
+		}		
+		playerScore.add(new Player(snake.getLen()));		
+		Collections.sort(playerScore);			
+		Player.save(playerScore, "score.txt");
+	}
 }
