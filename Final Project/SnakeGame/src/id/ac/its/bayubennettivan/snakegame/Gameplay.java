@@ -22,9 +22,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.Timer;
 
 public class Gameplay extends Screen implements KeyListener, ActionListener {
+	private static final long serialVersionUID = 1L;
 	JFrame dp = new JFrame();
 	private final static String DEFAULT_LOCATION = "src/assets/";
 	private int[] foodX = { 25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475,
@@ -41,7 +41,6 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	protected int difficulty = 2;
 	private Snake snake = new Snake(1);
 	long pauseTime = 0;
-	private Timer timer;
 	private int width = 851;
 	private int height = 55;
 	private int x = 24;
@@ -65,7 +64,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 
 	@Override
 	public void render(Graphics g) {
-	
+
 		// draw title image border
 		g.setColor(Color.WHITE);
 		g.drawRect(x, y, width, height);
@@ -119,14 +118,14 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	}
 
 	private Image loadImg(String filename) {
-        try {
-            return ImageIO.read(new File(DEFAULT_LOCATION + filename));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+		try {
+			return ImageIO.read(new File(DEFAULT_LOCATION + filename));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
-	
+
 	public void spriteThread() {
 		Thread sprites = new Thread(new Runnable() {
 			public void run() {
@@ -179,28 +178,24 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		movement.start();
 	}
 
-	private void gameOver()
-	{
+	private void gameOver() {
 		snake.setHp(0);
-		playerName.setBounds(470,335,150,30);
+		playerName.setBounds(470, 335, 150, 30);
 		this.add(playerName);
 		playerName.requestFocus();
 		Gameplay temp = this;
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(e.getX() >= 665 && e.getX() <= 740 && e.getY() >= 335 && e.getY() <= 365) {
-					if(playerName.getText().isEmpty()) {
+				if (e.getX() >= 665 && e.getX() <= 740 && e.getY() >= 335 && e.getY() <= 365) {
+					if (playerName.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(temp, "The field is empty");
-					}
-					else if(playerName.getText().length() > 8) {
+					} else if (playerName.getText().length() > 8) {
 						JOptionPane.showMessageDialog(temp, "Maximum number of characters is 8");
-					}
-					else
-					{
+					} else {
 						saveScore();
 						stateChange(0);
-					} 
+					}
 				}
 			}
 		});
@@ -414,25 +409,23 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	@Override
 	public void stateChange(int state) {
 		switch (state) {
-            case 0:
-                music.stopAll();
-                referred.setContentPane(new MainMenu(referred));
-                referred.validate();
-                referred.getContentPane().requestFocusInWindow();
-                break;
-        }
+			case 0:
+				music.stopAll();
+				referred.setContentPane(new MainMenu(referred));
+				referred.validate();
+				referred.getContentPane().requestFocusInWindow();
+				break;
+		}
 	}
 
-	
-	private void saveScore()
-	{
+	private void saveScore() {
 		List<Player> playerScore = Player.load("score.txt");
 		Player.setCompare(0);
-		if(playerScore == null) {
+		if (playerScore == null) {
 			playerScore = new ArrayList<>();
-		}		
+		}
 		playerScore.add(new Player(snake.getLen(), playerName.getText()));
-		Collections.sort(playerScore);			
+		Collections.sort(playerScore);
 		Player.save(playerScore, "score.txt");
 	}
 }

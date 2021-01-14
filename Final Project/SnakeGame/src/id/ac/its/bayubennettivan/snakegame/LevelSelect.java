@@ -14,6 +14,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class LevelSelect extends Screen {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private final static String DEFAULT_LOCATION = "src/assets/";
     private Image backgroundMenu, lvlOne, lvlTwo, snakeTitle;
     Gameplay gm;

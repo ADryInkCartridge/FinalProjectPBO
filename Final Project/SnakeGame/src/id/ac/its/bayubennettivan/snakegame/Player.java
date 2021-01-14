@@ -35,50 +35,49 @@ public class Player implements Comparable<Player>, Serializable {
     public void setScore(int score) {
         this.score = score;
     }
-    
+
     public static List<Player> load(String filename) {
-		List<Player> userScore;
-		try {
+        List<Player> userScore;
+        try {
             FileInputStream fileIn = new FileInputStream("src/score/" + filename);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             userScore = (List<Player>) objectIn.readObject();
-            objectIn.close(); 
+            objectIn.close();
             return userScore;
-        }catch(EOFException e) {
+        } catch (EOFException e) {
 
-        }catch (IOException e) {
+        } catch (IOException e) {
 
-        }catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
 
-		}
-		return null;
+        }
+        return null;
     }
-    
-    public static void save(List<Player> playerScore, String filename) 
-    {
-		try {			 
-          FileOutputStream fileOut = new FileOutputStream("src/score/" + filename);
-          ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-          objectOut.writeObject(playerScore);
-          objectOut.close();
-      } catch (IOException e) {
 
-      }
-	}
-    
+    public static void save(List<Player> playerScore, String filename) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("src/score/" + filename);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(playerScore);
+            objectOut.close();
+        } catch (IOException e) {
+
+        }
+    }
+
     public static void setCompare(int state) {
-		compare = state;
+        compare = state;
     }
-    
+
     @Override
     public int compareTo(Player x) {
-        if(Player.compare == 0) {
-			if(this.score > x.score ) {
-				return -1;
-			}else {
-				return 1;
+        if (Player.compare == 0) {
+            if (this.score > x.score) {
+                return -1;
+            } else {
+                return 1;
             }
         }
-		return score;
+        return score;
     }
 }

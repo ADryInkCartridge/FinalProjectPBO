@@ -19,6 +19,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class HighScoreMenu extends Screen {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private final static String DEFAULT_LOCATION = "src/assets/";
     private Image backgroundHS, backMenu, snakeTitle;
     private List<Player> playerScore;
@@ -43,7 +47,8 @@ public class HighScoreMenu extends Screen {
                 // untuk newGameBtn
                 if (e.getPoint().x >= 295 && e.getPoint().x <= 550 && e.getPoint().y >= 550 && e.getPoint().y <= 630) {
                     stateChange(0);
-                };
+                }
+                ;
             }
         });
     }
@@ -64,10 +69,10 @@ public class HighScoreMenu extends Screen {
         g.drawImage(backMenu, 295, 550, null);
         g.setFont(new Font("arial", Font.BOLD, 50));
         g.setColor(Color.WHITE);
-		int startX = 255, startY = 275;
-		for(int i = 0; i < playerScore.size() && i < 5; i++) {
-			StringBuffer sb = new StringBuffer();
-			sb.append(i+1 + ". " + playerScore.get(i).getNama() + " " + playerScore.get(i).getScore() + " points");
+        int startX = 255, startY = 275;
+        for (int i = 0; i < playerScore.size() && i < 5; i++) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(i + 1 + ". " + playerScore.get(i).getNama() + " " + playerScore.get(i).getScore() + " points");
             g.drawString(sb.toString(), startX, startY + 50 * i);
         }
     }

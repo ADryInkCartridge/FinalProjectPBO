@@ -14,6 +14,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class MainMenu extends Screen {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private final static String DEFAULT_LOCATION = "src/assets/";
     private Image backgroundMenu, newGameBtn, hScoreMenu, snakeTitle;
     Music music = new Music();
