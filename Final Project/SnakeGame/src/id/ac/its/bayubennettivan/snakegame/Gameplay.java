@@ -78,7 +78,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		g.drawRect(x, 74, width, height + 522);
 
 		// draw background
-		System.out.println(difficulty + "Render");
+		// System.out.println(difficulty + "Render");
 		switch (difficulty) {
 			case 1:
 				background = new ImageIcon("src/assets/background.png");
@@ -94,6 +94,9 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		g.setFont(new Font("arial", Font.BOLD, 25));
 		g.drawString("Length: " + snake.getLen(), 740, 45);
 
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("arial", Font.BOLD, 25));
+		g.drawString("Press ESC to pause", 40, 45);
 		for (Food i : food) {
 			i.render(g);
 		}
@@ -106,7 +109,14 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			i.render(g);
 		}
 		snake.render(g);
-
+		if (isPaused) {
+			System.out.println("Paused");
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("arial", Font.BOLD, 70));
+			g.drawString("Paused", 315, 340);
+			g.setFont(new Font("arial", Font.BOLD, 35));
+			g.drawString("Press ESC to unpause", 260, 380);
+		}
 		if (snake.getHp() == 0) {
 			g.drawImage(okButton, 665, 335, null);
 			g.setColor(Color.WHITE);
@@ -165,7 +175,7 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 							e.printStackTrace();
 						}
 					} else {
-
+						repaint();
 					}
 				}
 				if (snake.getHp() == 0) {
