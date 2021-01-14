@@ -37,7 +37,10 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 	private ImageIcon titleImage;
 	private ImageIcon background;
 	private Image okButton;
+	private Image restart;
+	private Image cLevel;
 	private boolean isPaused = false;
+	private boolean gameOver2 = false;
 	protected int difficulty = 2;
 	private Snake snake = new Snake(1);
 	long pauseTime = 0;
@@ -59,6 +62,8 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		startThread();
 		spriteThread();
 		okButton = loadImg("OKButton.png");
+		restart = loadImg("restart.png");
+		cLevel = loadImg("changelevel.png");
 		playerName = new JTextField();
 	}
 
@@ -119,6 +124,8 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 		}
 		if (snake.getHp() == 0) {
 			g.drawImage(okButton, 665, 335, null);
+			g.drawImage(restart, 165, 435, null);
+			g.drawImage(cLevel, 515, 435, null);
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("arial", Font.BOLD, 70));
 			g.drawString("Game Over", 265, 150);
@@ -206,6 +213,16 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 						saveScore();
 						stateChange(0);
 					}
+				}
+				else if (e.getX() >= 165 && e.getX() <= 365 && e.getY() >= 435 && e.getY() <= 515)
+				{
+					saveScore();
+					stateChange(1);
+				}
+				else if (e.getX() >= 515 && e.getX() <= 715 && e.getY() >= 435 && e.getY() <= 515)
+				{
+					saveScore();
+					stateChange(2);
 				}
 			}
 		});
@@ -422,6 +439,18 @@ public class Gameplay extends Screen implements KeyListener, ActionListener {
 			case 0:
 				music.stopAll();
 				referred.setContentPane(new MainMenu(referred));
+				referred.validate();
+				referred.getContentPane().requestFocusInWindow();
+				break;
+			case 1:
+				music.stopAll();
+				referred.setContentPane(new Gameplay(referred, difficulty));
+				referred.validate();
+				referred.getContentPane().requestFocusInWindow();
+				break;
+			case 2:
+				music.stopAll();
+				referred.setContentPane(new LevelSelect(referred, pauseTime));
 				referred.validate();
 				referred.getContentPane().requestFocusInWindow();
 				break;
