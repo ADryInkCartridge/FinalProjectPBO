@@ -9,9 +9,13 @@ import javax.swing.JPanel;
 
 public abstract class Screen extends JPanel {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     JFrame referred;
     public final static int PANEL_WIDTH = 905, PANEL_HEIGHT = 700;
-    protected Image screenImg; 
+    protected Image screenImg;
 
     public Screen(JFrame referred) {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -32,8 +36,8 @@ public abstract class Screen extends JPanel {
         return this.screenImg;
     }
 
-	public void setImg(Image screenImg) {
+    public void setImg(Image screenImg) {
         this.screenImg = screenImg;
-	}
+    }
 
 }
