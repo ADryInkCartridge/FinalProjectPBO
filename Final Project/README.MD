@@ -12,3 +12,5 @@ Pada level dua, akan ada makanan baru yang muncul, yaitu Api. Api akan terus ada
 Pada game Snake ini, ada setiap BGM yang berbeda untuk Main Menu, Level Easy, dan Level Hard. Player juga dapat mempause game mereka saat sedang bermain di level manapun. Selain itu, saat Snake mati, player dapat menginput nama untuk dimasukkan ke Leaderboards High Score. Di Main Menu, Player dapat memilih untuk memulai permainan atau mengecek High Score terlebih dahulu. 
 
 [referensi](https://www.youtube.com/watch?v=_SqnzvJuKiA&list=PLz5rnvLVJX5WPzzaJucyHujFCZNhVOivR)
+
+[Video Final Project](https://www.youtube.com/watch?v=JaNrnIDJ3OE)
