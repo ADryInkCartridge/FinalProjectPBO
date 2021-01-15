@@ -1,5 +1,5 @@
 ### Snake Game 
-![uml](Documentations/Final_Class_Diagram.PNG)
+![uml](Documentations/Final_Class_Diagram.png)
 
 Aplikasi yang akan kami buat adalah aplikasi berbasis game, yaitu game Snake. Game Snake merupakan sebuah game dimana player mengontrol sebuah Snake, atau ular.
 
