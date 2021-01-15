@@ -1,9 +1,14 @@
-### Snake Game (WIP)
-
-![uml](Documentations/Capture.PNG)
+### Snake Game 
+![uml](Documentations/Final_Class_Diagram.PNG)
 
 Aplikasi yang akan kami buat adalah aplikasi berbasis game, yaitu game Snake. Game Snake merupakan sebuah game dimana player mengontrol sebuah Snake, atau ular.
 
-Player dapat menggerakan ular ke empat arah, yaitu atas, bawah, kiri, dan kanan. Tujuan dari game ini adalah untuk mengontrol snake untuk memakan makanan yang akan muncul di board gamenya. Semakin banyak makanan yang dimakan oleh ular, maka semakin panjang juga tubuh ular akan tumbuh, lalu poin juga akan bertambah. Selain itu, ada hal yang harus dihindari oleh player, yaitu kepala ular tidak boleh menabrak badannya, jika hal ini sampai terjadi, maka ular tersebut akan mati dan akan terjadi Game Over. Saat Game Over, player akan dapat langsung melakukan restart game dengan mudah, dan state game akan kembali seperti saat awal.
+Seperti game Snake lainnya, player akan dapat mengontrol Snake ke empat arah, yaitu: atas, bawah, kanan, dan kiri. Objektif dari game ini adalah memakan apel sebanyak mungkin dan mendapatkan skor sebanyak mungkin. Di game ini terdapat dua level, yaitu Easy dan Hard. 
+
+Pada level pertama, akan ada 3 macam makanan yang akan muncul, yaitu: Apel, Buah Beracun, dan Bomb. Jika Snake memakan apel, maka panjang dan score dari player akan bertambah 1, sedangkan jika Snake memakan Buah Beracun, maka panjang dan score akan berkurang 1, dan jika Snake memakan Bomb, maka panjang dari Snake otomatis akan menjadi 0. Jika panjang snake menjadi 0, maka otomatis Snake mati.
+
+Pada level dua, akan ada makanan baru yang muncul, yaitu Api. Api akan terus ada didalam play area selama beberapa saat bahkan jika Snake telah memakan api tersebut. Jika api tersebut termakan, maka panjang dan skor Snake akan berkurang 1.
+
+Pada game Snake ini, ada setiap BGM yang berbeda untuk Main Menu, Level Easy, dan Level Hard. Player juga dapat mempause game mereka saat sedang bermain di level manapun. Selain itu, saat Snake mati, player dapat menginput nama untuk dimasukkan ke Leaderboards High Score. Di Main Menu, Player dapat memilih untuk memulai permainan atau mengecek High Score terlebih dahulu. 
 
 [referensi](https://www.youtube.com/watch?v=_SqnzvJuKiA&list=PLz5rnvLVJX5WPzzaJucyHujFCZNhVOivR)
